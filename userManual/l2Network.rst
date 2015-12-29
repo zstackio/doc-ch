@@ -307,6 +307,56 @@ L2VlanNetwork清单示例（L2VlanNetwork Inventory Example）
      -
      - 0.6
 
+创建L2VlanNetwork（Create L2VlanNetwork）
+======================
+
+管理员可以使用CreateL2VlanNetwork来创建L2VlanNetwork. 例如::
+
+    CreateL2VlanNetwork name=APPLICATION-L2 physicalInterface=eth0 vlan=100 zoneUuid=69b5be02a15742a08c1b7518e32f442a
+
+参数（Parameters）
+++++++++++
+
+.. list-table::
+   :widths: 20 40 10 20 10
+   :header-rows: 1
+
+   * - 名字
+     - 描述
+     - 可选的
+     - 可选的参数值
+     - 起始支持版本
+   * - **name**
+     - 资源的名字, 请参见 :ref:`resource properties`
+     -
+     -
+     - 0.6
+   * - **vlan**
+     - 用来创建二层广播域的VLAN id
+     -
+     - [0, 4095]
+     - 0.6
+   * - **resourceUuid**
+     - 资源的uuid, 请参见 :ref:`create resource`
+     - 是
+     -
+     - 0.6
+   * - **description**
+     - 资源的描述, 请参见 :ref:`resource properties`
+     - 是
+     -
+     - 0.6
+   * - **zoneUuid**
+     - 父区域的uuid, 请参见 :ref:`zone <zone>`
+     -
+     -
+     - 0.6
+   * - **physicalInterface**
+     - 请参见 :ref:`physical interface <l2Network physical interface>`
+     -
+     -
+     - 0.6
+
 删除L2网络（Delete L2 Network）
 =================
 
