@@ -554,7 +554,7 @@ connection.autoReconnectOnError
      - - true
        - false
 
-设置当主机的链接状态从Disconnected变为Connected时是否重连. 如果设置为true, 管理节点会通过ping命令重新连接状态从Disconnected变为Connected的主机, 从而让主机完成它在disconnected时错过的操作; 
+设置当主机的链接状态从Connected变为Disconnected时是否重连. 如果设置为true, 管理节点会通过ping命令重新连接状态从Connected变为Disconnected的主机, 从而让主机完成它在disconnected时错过的操作, 例如, 主机可能disconnected时错过了主机上代理（agent）的升级; 
 如果设置为false, 管理员根据需要必须手动重连这些主机，管理节点不会自动重连这些主机.
 
 .. _maintenanceMode.ignoreError:
