@@ -60,4 +60,5 @@ ZStack是一个开源的基础架构即服务的软件，用于管理数据中�
     userManual/portForwarding
     userManual/eip
     userManual/volumeSnapshot
+    userManual/lb
 
