@@ -425,7 +425,7 @@ DesignatedHostAllocatorStrategy使用下面的算法:
 专用主存储（Dedicated Primary Storage）
 +++++++++++++++++++++++++
 
-当创建虚拟机的时候, 用户可以通过系统标签指定从哪个主存储创建根卷.
+当创建虚拟机的时候, 用户可以通过系统标签指定从哪个主存储创建根云盘.
 
 .. list-table::
    :widths: 20 30 40 10
@@ -436,17 +436,17 @@ DesignatedHostAllocatorStrategy使用下面的算法:
      - 示例
      - 起始支持版本
    * - **primaryStorage::allocator::uuid::{uuid}**
-     - | 如果该标签存在, 虚拟机的根卷会从*uuid*指定的主存储分配;
+     - | 如果该标签存在, 虚拟机的根云盘会从*uuid*指定的主存储分配;
        | 如果指定的主存储不存在或没有足够的容量，会报告分配失败（allocation failure）.
      - primaryStorage::allocator::uuid::b8398e8b7ff24527a3b81dc4bc64d974
      - 0.6
    * - **primaryStorage::allocator::userTag::{tag}::required**
-     - | 如果该标签存在, 虚拟机的根卷会从带有用户标签*tag*的主存储分配;
+     - | 如果该标签存在, 虚拟机的根云盘会从带有用户标签*tag*的主存储分配;
        | 如果指定的主存储不存在或没有足够的容量，会报告分配失败（allocation failure）
      - primaryStorage::allocator::userTag::SSD::required
      - 0.6
    * - **primaryStorage::allocator::userTag::{tag}**
-     - | 如果该标签存在, 虚拟机的根卷会首相尝试从带有用户标签*tag*的主存储分配, 如果找不到带指定标签的主存储或容量不足，ZStack会随机选择一个主存储分配这个根卷;.
+     - | 如果该标签存在, 虚拟机的根云盘会首相尝试从带有用户标签*tag*的主存储分配, 如果找不到带指定标签的主存储或容量不足，ZStack会随机选择一个主存储分配这个根云盘;.
      - primaryStorage::allocator::userTag::SSD
      - 0.6
 

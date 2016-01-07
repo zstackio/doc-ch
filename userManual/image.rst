@@ -11,15 +11,15 @@
 概览（Overview）
 --------
 
-镜像为虚拟机文件系统提供模板. 镜像可以是为虚拟机安装操作系统的根卷（root volume）提供模板的RootVolumeTemplate; 
-镜像也可以是为虚拟机存储非操作系统数据的数据卷（data volumes）提供模板的DataVolumeTemplate; 
-同时镜像也可以是用来在空白根卷（blank root volumes）上安装操作系统的ISO文件.
+镜像为虚拟机文件系统提供模板. 镜像可以是为虚拟机安装操作系统的根云盘（root volume）提供模板的RootVolumeTemplate; 
+镜像也可以是为虚拟机存储非操作系统数据的数据云盘（data volumes）提供模板的DataVolumeTemplate; 
+同时镜像也可以是用来在空白根云盘（blank root volumes）上安装操作系统的ISO文件.
 
-镜像存储在:ref:`backup storage <backup storage>`上. 如果在启动虚拟机之前, 用来创建虚拟机根卷的镜像还不在:ref:`primary storage <primary storage>`的镜像缓存（image cache）中, 镜像会先被下载到缓存中. 
+镜像存储在:ref:`backup storage <backup storage>`上. 如果在启动虚拟机之前, 用来创建虚拟机根云盘的镜像还不在:ref:`primary storage <primary storage>`的镜像缓存（image cache）中, 镜像会先被下载到缓存中. 
 因此在首次用一个镜像创建创建虚拟机的时候，通常会由于需要下载而花费更多的时间.
 
-ZStack使用`thin provisioning <http://en.wikipedia.org/wiki/Thin_provisioning>`_创建根卷. 
-从相同镜像创建出来的根卷共享主存储的镜像缓存中同一份基础镜像（base image），对某个虚拟机根卷的改动不会影响到基础镜像.
+ZStack使用`thin provisioning <http://en.wikipedia.org/wiki/Thin_provisioning>`_创建根云盘. 
+从相同镜像创建出来的根云盘共享主存储的镜像缓存中同一份基础镜像（base image），对某个虚拟机根云盘的改动不会影响到基础镜像.
 
 .. _image inventory:
 
@@ -183,7 +183,7 @@ ZStack使用`thin provisioning <http://en.wikipedia.org/wiki/Thin_provisioning>`
 
 - **Creating**:
 
-  正在从卷或卷快照（volume snapshot）创建镜像; 未就绪不能使用.
+  正在从云盘或云盘快照（volume snapshot）创建镜像; 未就绪不能使用.
 
 - **Downloading**:
 
@@ -198,7 +198,7 @@ ZStack使用`thin provisioning <http://en.wikipedia.org/wiki/Thin_provisioning>`
 URL
 ===
 
-镜像在备份存储中创建的方式不同，url的含义也会不同; 如果镜像是从网页服务器下载的，url就是HTTP/HTTPS链接; 如果镜像是从卷或者卷快照创建的, url就是卷或卷快照的UUID的字符串编码, 例如::
+镜像在备份存储中创建的方式不同，url的含义也会不同; 如果镜像是从网页服务器下载的，url就是HTTP/HTTPS链接; 如果镜像是从云盘或者云盘快照创建的, url就是云盘或云盘快照的UUID的字符串编码, 例如::
 
     volume://b395386bdb4a4ff1b1850a457c949c5e
     volumeSnapshot://b395386bdb4a4ff1b1850a457c949c5e
@@ -215,15 +215,15 @@ URL
 
 - **RootVolumeTemplate**:
 
-  镜像被用来创建根卷.
+  镜像被用来创建根云盘.
 
 - **DataVolumeTemplate**:
 
-  镜像被用来创建数据卷.
+  镜像被用来创建数据云盘.
 
 - **ISO**:
 
-  镜像被用来在空白的根卷上安装操作系统.
+  镜像被用来在空白的根云盘上安装操作系统.
 
 .. _image platform:
 
@@ -269,8 +269,8 @@ ZStack当前版本仅支持KVM虚拟机管理程序, 因此关系表如下:
      - - qcow2
        - raw
 
-创建的卷会从其所基于的镜像继承格式信息; 例如, 从qcow2格式的镜像创建的根卷同样会是qcow2格式.
-'raw'格式是个特例, 从'raw'格式的镜像创建的卷会使用qcow2格式，因为ZStack会通过qcow2格式使用thin-clone.
+创建的云盘会从其所基于的镜像继承格式信息; 例如, 从qcow2格式的镜像创建的根云盘同样会是qcow2格式.
+'raw'格式是个特例, 从'raw'格式的镜像创建的云盘会使用qcow2格式，因为ZStack会通过qcow2格式使用thin-clone.
 
 .. _image backup storage reference:
 
@@ -495,10 +495,10 @@ ZStack当前版本仅支持KVM虚拟机管理程序, 因此关系表如下:
        - disable
      - 0.6
 
-从根卷创建RootVolumeTemplate（Create RootVolumeTemplate From Root Volume）
+从根云盘创建RootVolumeTemplate（Create RootVolumeTemplate From Root Volume）
 ==========================================
 
-用户可以从根卷创建RootVolumeTemplate镜像. 例如::
+用户可以从根云盘创建RootVolumeTemplate镜像. 例如::
 
     CreateRootVolumeTemplateFromRootVolume name=CentOS7 rootVolumeUuid=1ab2386bdb4a4ff1b1850a457c949c5e backupStorageUuids=backupStorageUuids,f295386bdb4a4ff1b1850a457c949c5e
 
@@ -535,7 +535,7 @@ ZStack当前版本仅支持KVM虚拟机管理程序, 因此关系表如下:
      -
      - 0.6
    * - **rootVolumeUuid**
-     - 即将用于创建该镜像的根卷的uuid
+     - 即将用于创建该镜像的根云盘的uuid
      -
      -
      - 0.6
@@ -569,10 +569,10 @@ ZStack当前版本仅支持KVM虚拟机管理程序, 因此关系表如下:
 
 .. _create RootVolumeTemplate from volume snapshot:
 
-从卷快照创建RootVolumeTemplate（Create RootVolumeTemplate From Volume Snapshot）
+从云盘快照创建RootVolumeTemplate（Create RootVolumeTemplate From Volume Snapshot）
 ==============================================
 
-用户可以使用CreateRootVolumeTemplateFromVolumeSnapshot从卷快照创建一个RootVolumeTemplate. 例如::
+用户可以使用CreateRootVolumeTemplateFromVolumeSnapshot从云盘快照创建一个RootVolumeTemplate. 例如::
 
     CreateRootVolumeTemplateFromVolumeSnapshot name=CentOS7 snapshotUuid=1ab2386bdb4a4ff1b1850a457c949c5e
 
@@ -604,7 +604,7 @@ ZStack当前版本仅支持KVM虚拟机管理程序, 因此关系表如下:
      -
      - 0.6
    * - **snapshotUuid**
-     - 卷快照的uuid, 请参见 :ref:`volume snapshot <volume snapshot>`
+     - 云盘快照的uuid, 请参见 :ref:`volume snapshot <volume snapshot>`
      -
      -
      - 0.6
@@ -641,15 +641,15 @@ ZStack当前版本仅支持KVM虚拟机管理程序, 因此关系表如下:
 当调用CreateRootVolumeTemplateFromVolumeSnapshot时, 用户可以提供一个备份存储UUID里列表来指定在哪里创建镜像;
 如果忽略这个域, 会随机选择一个备份存储创建镜像.
 
-从卷创建DataVolumeTemplate（Create DataVolumeTemplate From Volume）
+从云盘创建DataVolumeTemplate（Create DataVolumeTemplate From Volume）
 =====================================
 
-用户可以使用CreateDataVolumeTemplateFromVolume来从卷创建一个DataVolumeTemplate. 例如::
+用户可以使用CreateDataVolumeTemplateFromVolume来从云盘创建一个DataVolumeTemplate. 例如::
 
     CreateDataVolumeTemplateFromVolume name=data volumeUuid=1ab2386bdb4a4ff1b1850a457c949c5e
 
-这里的卷，可以是根卷，也可以是数据卷. 因此这里提供了一种从根卷创建数据卷的方法.
-用户可以先从根卷创建一个DataVolumeTemplate, 然后基于该DataVolumeTemplate再创建数据卷.
+这里的云盘，可以是根云盘，也可以是数据云盘. 因此这里提供了一种从根云盘创建数据云盘的方法.
+用户可以先从根云盘创建一个DataVolumeTemplate, 然后基于该DataVolumeTemplate再创建数据云盘.
 
 参数（Parameters）
 ++++++++++
@@ -679,7 +679,7 @@ ZStack当前版本仅支持KVM虚拟机管理程序, 因此关系表如下:
      -
      - 0.6
    * - **volumeUuid**
-     - 卷的uuid, 请参见 :ref:`volume <volume>`
+     - 云盘的uuid, 请参见 :ref:`volume <volume>`
      -
      -
      - 0.6
@@ -731,7 +731,7 @@ Backup Storage Uuids
      - 0.6
    * - **volume**
      - :ref:`volume inventory <volume inventory>`
-     - 从该镜像创建的所有卷
+     - 从该镜像创建的所有云盘
      - 0.6
    * - **backupStorageRef**
      - :ref:`backup storage reference <image backup storage reference>`

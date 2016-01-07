@@ -491,7 +491,7 @@ ZStack提供了一个内建的（builtin）网络服务模块（network service 
      - 0.6
    * - **allVolumes**
      - :ref:`volume inventory <volume inventory>`
-     - 虚拟路由器虚拟机的卷
+     - 虚拟路由器虚拟机的云盘
      - 0.6
    * - **host**
      - :ref:`host inventory <host inventory>`
@@ -511,7 +511,7 @@ ZStack提供了一个内建的（builtin）网络服务模块（network service 
      - 0.6
    * - **rootVolume**
      - :ref:`volume inventory <volume inventory>`
-     - 虚拟路由器虚拟机的根卷
+     - 虚拟路由器虚拟机的根云盘
      - 0.6
    * - **virtualRouterOffering**
      - :ref:`virtual router offering inventory <virtual router offering inventory>`

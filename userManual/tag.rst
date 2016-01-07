@@ -35,16 +35,16 @@ ZStack提供两类标签来帮助用户和插件管理资源， 引入额外的�
     QueryVmInstance __userTag__=web
 
 
-用户也可以通过用户标签和系统标签（system tags）合作来改变ZStack的业务逻辑; 例如, 用户可能想在所有作为网页服务器的虚拟机上在一个特定的通过SSD提高IO性能的主存储上创建他们的根存储卷（root volumes）; 要达到这个目的,
+用户也可以通过用户标签和系统标签（system tags）合作来改变ZStack的业务逻辑; 例如, 用户可能想在所有作为网页服务器的虚拟机上在一个特定的通过SSD提高IO性能的主存储上创建他们的根存储云盘（root volumes）; 要达到这个目的,
 用户可以在主存储上创建一个用户标签'forWebTierVM'::
 
     CreateUserTag tag=forWebTierVM resourceType=PrimaryStorageVO resourceUuid=6572ce44c3f6422d8063b0fb262cbc62
 
-然后在计算方案(instance offering)上创建一个系统标签::
+然后在计算规格(instance offering)上创建一个系统标签::
 
     CreateSystemTag tag=primaryStorage::allocator::userTag::forWebTierVM resourceType=InstanceOfferingVO resourceUuid=8f69ef6c2c444cdf8c019fa0969d56a5
 
-这样, 当用户创建通过计算方案[uuid:8f69ef6c2c444cdf8c019fa0969d56a5]创建虚拟机的, ZStack会保证虚拟机的根存储卷都会被创建在拥有用户标签'forWebTierVM'的主存储上，
+这样, 当用户创建通过计算规格[uuid:8f69ef6c2c444cdf8c019fa0969d56a5]创建虚拟机的, ZStack会保证虚拟机的根存储云盘都会被创建在拥有用户标签'forWebTierVM'的主存储上，
 在这个例子中, 这个主存储的UUID为6572ce44c3f6422d8063b0fb262cbc62.
 
 -----------
@@ -54,7 +54,7 @@ ZStack提供两类标签来帮助用户和插件管理资源， 引入额外的�
 系统标签相比用户标签有更广泛的用途; 就像上一节中的例子一样，用户可以使用它们来指导ZStack执行特殊的业务逻辑.
 扩展ZStack功能的插件（Plugins）可以通过使用系统标签来引入额外的资源属性, 或记录和资源紧密相关的元数据.
 
-例如, 要想在KVM主机上实施在线迁移（live migration）或者在线镜像（live snapshot）, ZStack需要知道KVM主机的libvirt版本和QEMU版本，这些信息都是元数据
+例如, 要想在KVM主机上实施在线迁移（live migration）或者在线快照（live snapshot）, ZStack需要知道KVM主机的libvirt版本和QEMU版本，这些信息都是元数据
 因此ZStack将他们作为主机的系统标签存储起来. 例如, 管理员可以通过下面的命令查看一个KVM主机的系统标签::
 
     QuerySystemTag fields=tag resourceUuid=d07066c4de02404a948772e131139eb4
@@ -210,7 +210,7 @@ CreateUserTag和CreateSystemTag有相同的API参数:
      - 可选的
      - 起始支持版本
    * - **resourceUuid**
-     - 资源UUID; 例如, 虚拟机的UUID, 计算方案的UUID
+     - 资源UUID; 例如, 虚拟机的UUID, 计算规格的UUID
      -
      - 0.6
    * - **resourceType**
