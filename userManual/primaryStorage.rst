@@ -11,12 +11,12 @@
 概览（Overview）
 --------
 
-主存储是数据中心里为虚拟机提供磁盘卷的存储系统. 主存储可以是本地磁盘（local disks，例如主机的硬盘) 或者网络共享存储（network shared storage, 例如NAS, SAN ).
+主存储是数据中心里为虚拟机提供磁盘云盘的存储系统. 主存储可以是本地磁盘（local disks，例如主机的硬盘) 或者网络共享存储（network shared storage, 例如NAS, SAN ).
 
 .. image:: primary-storage.png
    :align: center
 
-挂载了主存储的集群中的虚拟机的卷存储在该主存储上.
+挂载了主存储的集群中的虚拟机的云盘存储在该主存储上.
 
 主存储只能挂载到同一个区域（zone）中的集群上.
 
@@ -143,27 +143,27 @@
 容量（Capacity）
 ++++++++
 
-为了方便选择合适的主存储创建卷, ZStack会监控主存储的容量. 不同的主存储插件可能会汇报不同的磁盘容量;
+为了方便选择合适的主存储创建云盘, ZStack会监控主存储的容量. 不同的主存储插件可能会汇报不同的磁盘容量;
 例如, 对于支持超分（over-provisioning）的主存储, 汇报的存储容量会比实际的大;
 对于不支持超分的主存储, 汇报的存储容量可能会小于或等于实际的大小.
 
 NFS容量（NFS Capacity）
 ------------
 
-NFS不支持超分, 因此它的容量是用卷的虚拟大小（volumes' virtual sizes）根据以下公式计算出来的::
+NFS不支持超分, 因此它的容量是用云盘的虚拟大小（volumes' virtual sizes）根据以下公式计算出来的::
 
     总容量 = NFS的总容量
-    可用容量 = 总容量 - sum(卷的虚拟大小)
+    可用容量 = 总容量 - sum(云盘的虚拟大小)
 
-卷的虚拟大小会在 :ref:`volume <volume>`章节中介绍; 简单的说, 卷的虚拟大小就是当卷被完全填满时的大小; 
-例如, 当你创建一个1G容量的卷时, 在它被真正完全填满数据之前, 可能会因为使用了精简配置技术（thin-provisioning technology）而实际只占用了10M的容量.
+云盘的虚拟大小会在 :ref:`volume <volume>`章节中介绍; 简单的说, 云盘的虚拟大小就是当云盘被完全填满时的大小; 
+例如, 当你创建一个1G容量的云盘时, 在它被真正完全填满数据之前, 可能会因为使用了thin-provisioning技术而实际只占用了10M的容量.
 
 .. _primary storage url:
 
 统一资源定位符（URL）
 +++
 
-主存储需要使用URL字符串存储的信息来控制存储系统. 虽然名字叫URL, 具体的字符串存储格式依据主存储的类型而定，并不需要严格依照URL的规范, 这样可以给插件更多的灵活性以存储一些不方便以URL格式存储的信息.
+主存储需要使用URL字符串存储的信息来控制存储系统. 虽然名字叫URL, 具体的字符串存储格式依据主存储的类型而定，并不完全等同于标准的URL规范, 这样可以给插件更多的灵活性以存储一些不方便以URL格式存储的信息.
 
 NFS主存储URL
 -------
@@ -186,11 +186,11 @@ NFS主存储URL
 
 - ** Enabled**:
 
-  启用（Enabled）状态下，允许卷被创建
+  启用（Enabled）状态下，允许云盘被创建
 
 - **Disabled**:
 
-  禁用（Disabled）状态下，不允许卷被创建
+  禁用（Disabled）状态下，不允许云盘被创建
 
 .. _primary storage status:
 
@@ -318,7 +318,7 @@ NFS主存储URL
 
     DeletePrimaryStorage uuid=2c830f5bd1cb469b821b4b77babfdd6f
 
-.. 危险:: 删除一个主存储会导致所有该主存储包含的卷和卷快照（volume snapshots）被删除. 虚拟机也会因为根卷（root volumes）被删除而被删除. 没有办法可以恢复已经删除的主存储. 挂载的集群也会被卸载.
+.. 危险:: 删除一个主存储会导致所有该主存储包含的云盘和云盘快照（volume snapshots）被删除. 虚拟机也会因为根云盘（root volumes）被删除而被删除. 没有办法可以恢复已经删除的主存储. 挂载的集群也会被卸载.
 
 属性（Properties）
 ++++++++++
@@ -422,11 +422,11 @@ NFS主存储URL
      - 0.6
    * - **volume**
      - :ref:`volume inventory <volume inventory>`
-     - 该主存储中的卷
+     - 该主存储中的云盘
      - 0.6
    * - **volumeSnapshot**
      - :ref:`volume snapshot inventory <volume snapshot inventory>`
-     - 该主存储中的卷镜像
+     - 该主存储中的云盘快照
      - 0.6
    * - **cluster**
      - :ref:`cluster inventory <cluster inventory>`
@@ -470,7 +470,7 @@ NFS主存储在KVM主机上的挂载点（mount point）.
 系统标签（System Tags）
 ===========
 
-存储卷镜像（Storage Volume Snapshot）
+存储云盘快照（Storage Volume Snapshot）
 +++++++++++++++++++++++
 
 .. list-table::
@@ -482,6 +482,6 @@ NFS主存储在KVM主机上的挂载点（mount point）.
      - 示例
      - 起始支持版本
    * - **capability:snapshot**
-     - 当有该标签时, 主存储支持存储卷镜像
+     - 当有该标签时, 主存储支持存储云盘快照
      - capability:snapshot
      - 0.6

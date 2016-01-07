@@ -81,11 +81,11 @@ IaaS软件通常使用诸如'zone', 'cluster'来描述数据中心中设施的�
 
 - **主存储（Primary Storage）**:
 
-  主存储为虚拟机运行时会访问的卷（volume）提供磁盘存储. 主存储可以是类似NFS的文件系统也可以是类似ISCSI的块存储。
+  主存储为虚拟机运行时会访问的云盘（volume）提供磁盘存储. 主存储可以是类似NFS的文件系统也可以是类似ISCSI的块存储。
 
 - **备份存储（Backup Storage）**:
 
-  备份存储为存储映像（images）和卷快照（volume snapshots）提供磁盘存储，两者都可以用于创建卷. 备份存储上的文件并不被虚拟机直接访问; 在被使用之前，他们需要被下载到主存储。备份存储可以基于文件系统或者对象存储（object storage）.
+  备份存储为存储映像（images）和云盘快照（volume snapshots）提供磁盘存储，两者都可以用于创建云盘. 备份存储上的文件并不被虚拟机直接访问; 在被使用之前，他们需要被下载到主存储。备份存储可以基于文件系统或者对象存储（object storage）.
 
 ZStack使用一种称为挂载策略（attaching strategy）来描述资源之间的关系, 例如, 一个集群可以被挂载于多个主存储和L2网络，反之亦然.
 相关章节(主存储, L2网络)有更详细的介绍.
@@ -100,4 +100,4 @@ ZStack使用一种称为挂载策略（attaching strategy）来描述资源之�
 
 .. 注意:: 出于简化, 图中忽略了一些设施例如汇聚交换机（aggregation switches）, 核心交换机（core switches）, 路由器（routers）, 负载均衡器（load balancer）, 防火墙（Firewalls），。。。.
 
-除以上描述数据中心设施的术语外，还有其他一些术语诸如虚拟机（VM），实例方案（instance offering）, 磁盘方案（disk offering）, 他们描述虚拟资源；在相关章节中有更详细的描述.
+除以上描述数据中心设施的术语外，还有其他一些术语诸如虚拟机（VM），实例方案（instance offering）, 云盘规格（disk offering）, 他们描述虚拟资源；在相关章节中有更详细的描述.

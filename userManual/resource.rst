@@ -213,7 +213,7 @@ ZStack本质上是一个云资源的配置管理系统. 资源可以是物理资
 
     QueryVmInstance allVolumes.type=Data allVolumes.size>1099511627776
 
-示例中: 找出所有拥有一个或多个大于1099511627776字节(1T)数据卷的虚拟机
+示例中: 找出所有拥有一个或多个大于1099511627776字节(1T)数据云盘的虚拟机
 
 
 更新资源（Update Resources）

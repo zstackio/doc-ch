@@ -82,7 +82,7 @@
 
 .. _disk offering size:
 
-磁盘大小（Disk Size）
+云盘大小（Disk Size）
 +++++++++
 
 DiskSize定义了云盘的虚拟大小（virtual size）. 正如:ref:`volume <volume>`中提到的那样, 虚拟大小是指云盘声明的大小，也就是云盘完全填满后的在存储系统中所占的大小. 简单的说，虚拟大小就是，你希望云盘有多大.
@@ -155,7 +155,7 @@ DiskSize定义了云盘的虚拟大小（virtual size）. 正如:ref:`volume <vo
      -
      - 0.6
    * - **diskSize**
-     - 以字节为单位的磁盘大小, 请参见 :ref:`size <disk offering size>`
+     - 以字节为单位的云盘大小, 请参见 :ref:`size <disk offering size>`
      -
      -
      - 0.6

@@ -67,17 +67,17 @@
      -
      - 0.6
    * - **imageUuid**
-     - 用于创建虚拟机根卷的镜像uuid, 请参见 :ref:`image`
+     - 用于创建虚拟机根云盘的镜像uuid, 请参见 :ref:`image`
      -
      -
      - 0.6
    * - **instanceOfferingUuid**
-     - 计算方案的uuid, 请参见 :ref:`instance offering`
+     - 计算规格的uuid, 请参见 :ref:`instance offering`
      -
      -
      - 0.6
    * - **rootVolumeUuid**
-     - 虚拟机根卷的uuid, 请参见 :ref:`volume`
+     - 虚拟机根云盘的uuid, 请参见 :ref:`volume`
      -
      -
      - 0.6
@@ -332,12 +332,12 @@ hostUuid会被设置为NULL, zoneUuid和clusterUuid会保持不变. lastHostUuid
 
 .. _vm volumes:
 
-卷（Volumes）
+云盘（Volumes）
 +++++++
 
-`allVolumes`域是由:ref:`volume inventory <volume inventory>`组成的列表，其中包含了根卷（root volume）和数据卷（data volumes）.
-如果要找出其中的根卷，用户可以通过迭代这个列表，并检查卷的类型或者使用域'rootVolumeUuid'来匹配卷的UUID.
-根卷会一直和虚拟机伴随，直到虚拟机被删除.
+`allVolumes`域是由:ref:`volume inventory <volume inventory>`组成的列表，其中包含了根云盘（root volume）和数据云盘（data volumes）.
+如果要找出其中的根云盘，用户可以通过迭代这个列表，并检查云盘的类型或者使用域'rootVolumeUuid'来匹配云盘的UUID.
+根云盘会一直和虚拟机伴随，直到虚拟机被删除.
 
 .. _vm hypervisor type:
 
@@ -351,7 +351,7 @@ hostUuid会被设置为NULL, zoneUuid和clusterUuid会保持不变. lastHostUuid
   由于镜像中已经安装有操作系统, 虚拟机会被创建在和镜像有相同虚拟机管理程序类型的主机上, 因此虚拟机的虚拟机管理程序类型是从镜像继承而来的.
 
 - **从ISO文件创建的虚拟机**:
-  由于会使用ISO安装操作系统到虚拟机的空白根卷上, 虚拟机可能被创建在拥有任何类型的虚拟机管理程序的主机上, 因此虚拟机的虚拟机管理程序类型是从创建的主机上继承而来的.
+  由于会使用ISO安装操作系统到虚拟机的空白根云盘上, 虚拟机可能被创建在拥有任何类型的虚拟机管理程序的主机上, 因此虚拟机的虚拟机管理程序类型是从创建的主机上继承而来的.
 
 .. _vm state:
 
@@ -467,7 +467,7 @@ ZStack会使用VmTracer来周期性的跟踪虚拟机的状态; 默认的间隔�
        - ApplianceVm
      - 0.6
    * - **rootDiskOfferingUuid**
-     - 根卷:ref:`disk offering <disk offering>`的uuid, 请参见 :ref:`rootDiskOfferingUuid`
+     - 根云盘:ref:`disk offering <disk offering>`的uuid, 请参见 :ref:`rootDiskOfferingUuid`
      - 是
      -
      - 0.6
@@ -503,7 +503,7 @@ ZStack会使用VmTracer来周期性的跟踪虚拟机的状态; 默认的间隔�
 rootDiskOfferingUuid
 --------------------
 
-如果虚拟机是从ISO镜像创建的, 用户必须通过rootDiskOfferingUuid指定一个:ref:`disk offering <disk offering>，这样ZStack才能知道根卷的磁盘大小; 
+如果虚拟机是从ISO镜像创建的, 用户必须通过rootDiskOfferingUuid指定一个:ref:`disk offering <disk offering>，这样ZStack才能知道根云盘的磁盘大小; 
 如果虚拟机是从RootVolumeTemplate镜像创建的, 可以忽略这个域.
 
 .. _dataDiskOfferingUuids:
@@ -511,8 +511,8 @@ rootDiskOfferingUuid
 dataDiskOfferingUuids
 ---------------------
 
-通过在dataDiskOfferingUuids指定磁盘方案的UUID列表, 用户可以创建一个挂载了多个数据卷的虚拟机.
-如果某个数据卷创建失败了，整个虚拟机的创建也会失败.
+通过在dataDiskOfferingUuids指定云盘规格的UUID列表, 用户可以创建一个挂载了多个数据云盘的虚拟机.
+如果某个数据云盘创建失败了，整个虚拟机的创建也会失败.
 
 .. _StopVmInstance:
 
@@ -631,7 +631,7 @@ dataDiskOfferingUuids
      -
      - 0.6
 
-.. 警告:: 没有办法可以恢复一个已经被删除的虚拟机; 一旦虚拟机被删除, 它的根卷也会被删除; 如果全局设置:ref:`dataVolume.deleteOnVmDestroy`为true, 虚拟机挂载的数据卷也会被删除; 否则, 数据卷只会被卸载.
+.. 警告:: 没有办法可以恢复一个已经被删除的虚拟机; 一旦虚拟机被删除, 它的根云盘也会被删除; 如果全局设置:ref:`dataVolume.deleteOnVmDestroy`为true, 虚拟机挂载的数据云盘也会被删除; 否则, 数据云盘只会被卸载.
 
 .. _MigrateVm:
 
@@ -672,12 +672,12 @@ dataDiskOfferingUuids
 .. 警告:: 对于KVM而言, 如果你使用了定制版本（customized）的libvirt和qemu，而不是系统自带的版本（builtin ones）, 及时操作系统版本相同，迁移也可能会失败. 请确保迁移中的两台主机的操作系统版本, libvirt版本, 和qemu版本都相同.
 
 
-挂载数据卷（Attach Data Volume）
+挂载数据云盘（Attach Data Volume）
 ==================
 
 请参见 :ref:`attach volume to vm <AttachDataVolumeToVm>`.
 
-卸载数据卷（Detach Data volume）
+卸载数据云盘（Detach Data volume）
 ==================
 
 请参见 :ref:`detach volume from vm <DetachDataVolumeFromVm>`.
@@ -716,7 +716,7 @@ dataDiskOfferingUuids
      - 0.6
    * - **allVolumes**
      - :ref:`volume inventory <volume inventory>`
-     - 虚拟机拥有的所有卷
+     - 虚拟机拥有的所有云盘
      - 0.6
    * - **zone**
      - :ref:`zone inventory <zone inventory>`
@@ -736,11 +736,11 @@ dataDiskOfferingUuids
      - 0.6
    * - **instanceOffering**
      - :ref:`instance offering inventory <instance offering inventory>`
-     - 用于创建该虚拟机的计算方案
+     - 用于创建该虚拟机的计算规格
      - 0.6
    * - **rootVolume**
      - :ref:`volume inventory <volume inventory>`
-     - 该虚拟机的根卷
+     - 该虚拟机的根云盘
      - 0.6
 
 查询虚拟机的网卡（Query VM Nic）
@@ -809,8 +809,8 @@ dataVolume.deleteOnVmDestroy
      - - true
        - false
 
-如果设置为true, 当虚拟机被删除时，虚拟机上挂载的数据卷也会被删除;
-否则, 数据卷仅会被卸载.
+如果设置为true, 当虚拟机被删除时，虚拟机上挂载的数据云盘也会被删除;
+否则, 数据云盘仅会被卸载.
 
 ----
 标签（Tags）

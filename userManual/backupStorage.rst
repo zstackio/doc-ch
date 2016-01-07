@@ -11,8 +11,8 @@
 概览（Overview）
 --------
 
-备份存储是保存用于创建卷的:ref:`images <image>`的存储系统. 备份存储可以是基于存储的文件系统（filesystem based storage，例如NFS），也是可以基于对象的存储（object store based storage，例如OpenStack SWIFT）, 只要该存储系统为网络可共享的存储（network
-shared storage）. 除了可以为创建卷提供模板以外, 备份存储也允许用户备份卷或卷快照（volume snapshots）.
+备份存储是保存用于创建云盘的:ref:`images <image>`的存储系统. 备份存储可以是基于存储的文件系统（filesystem based storage，例如NFS），也是可以基于对象的存储（object store based storage，例如OpenStack SWIFT）, 只要该存储系统为网络可共享的存储（network
+shared storage）. 除了可以为创建云盘提供模板以外, 备份存储也允许用户备份云盘或云盘快照（volume snapshots）.
 
 备份存储必须挂载到:ref:`zone <zone>`之后，区域中的资源才能访问它.
 管理员可以利用备份存储在多个区域之间共享镜像, 例如:
@@ -196,7 +196,7 @@ SFTP备份存储URL（SFTP Backup Storage URL）
 
 .. 警告:::: ZStack会持续的发送ping命令到Disconnected状态的备份存储. 一旦备份存储恢复并响应ping命令, ZStack会重新建立命令通道，并将备份存储的状态设置为Connected. 因此如果一个备份已经彻底从云中移除，请将它也从ZStack中删除，否则ZStack会一直尝试ping它.
 
-备份存储的启用状态转换图如下:
+备份存储的可用状态转换图如下:
 
 .. image:: backup-storage-status.png
    :align: center
@@ -319,8 +319,8 @@ ZStack使用一个python代理(SftpBackupStorageAgent)来管理Linux服务器; �
 
     DeleteBackupStorage uuid=1613b627cb2e4ffcb30e7e59935064be
 
-.. 警告:: 删除备份存储, 会使备份存储从挂载的区域上卸载. 所有的备份存储上的镜像或卷快照的拷贝都会被删除;
-             如果被删除的拷贝是镜像或卷快照的唯一拷贝，相对应的镜像或快照也会被删除.
+.. 警告:: 删除备份存储, 会使备份存储从挂载的区域上卸载. 所有的备份存储上的镜像或云盘快照的拷贝都会被删除;
+             如果被删除的拷贝是镜像或云盘快照的唯一拷贝，相对应的镜像或快照也会被删除.
              没有办法恢复一个已经删除了的备份存储.
 
 参数（Parameters）
@@ -487,7 +487,7 @@ ZStack使用一个python代理(SftpBackupStorageAgent)来管理Linux服务器; �
      - 0.6
    * - **volumeSnapshot**
      - :ref:`volume snapshot inventory <volume snapshot inventory>`
-     - 该备份存储包含的所有卷快照
+     - 该备份存储包含的所有云盘快照
      - 0.6
 
 查询SFTP备份存储（Query SFTP Backup Storage）
