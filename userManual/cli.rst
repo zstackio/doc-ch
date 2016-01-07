@@ -42,7 +42,7 @@ zstack-cli就是基于这个内置HTTP服务调用API的.
 
 
 模式（Modes）
-=====
+==================
 
 zstack-cli可以从shell接受参数工作在命令模式, 在这种模式下，他只运行一次, 然后从shell输出结果, 例如:
 
@@ -58,7 +58,7 @@ ztack-cli也可以工作在交互模式，在这种模式下，他会维护一�
 
 
 登陆（LogIn）
-=====
+==================
 
 在当前ZStack版本(0.6), 认证和访问管理系统（IAM，Identity and Access Management)还没就绪; 唯一的账户是'admin'，它使用默认密码('password'). 
 在执行任何命令之前, 你需要运行登陆命令'LogInByAccount'取得一个会话令牌（session token），这个令牌会被zstack-cli自动保存到~/.zstack/cli/session，所以你需要单独维护它::
@@ -67,7 +67,7 @@ ztack-cli也可以工作在交互模式，在这种模式下，他会维护一�
 
 
 登出（LogOut）
-======
+===================
 
 一旦你的工作已完成, 你可以使用'LogOut'命令来结束当前会话::
 

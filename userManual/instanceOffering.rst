@@ -1,27 +1,27 @@
 .. _instance offering:
 
-=================
+===================================
 计算规格（Instance Offering）
-=================
+===================================
 
 .. contents:: `目录`
    :depth: 6
 
---------
+--------------------
 概览（Overview）
---------
+--------------------
 
 计算规格定义了虚拟机的内存，CPU和主机分配算法（allocation algorithm）的规范（specification）; 它定义了虚拟机的计算资源容量（volume of computing
 resource).
 
 .. _instance offering inventory:
 
----------
+----------------------
 清单（Inventory）
----------
+----------------------
 
 属性（Properties）
-==========
+======================
 
 .. list-table::
    :widths: 20 40 10 20 10
@@ -94,12 +94,12 @@ resource).
 .. _instance offering cpu capacity:
 
 CPU容量（CPU Capacity）
-++++++++++++
++++++++++++++++++++++++++++
 
 计算规格使用cpuNum和cpuSpeed来定义虚拟机的CPU容量. cpuNum直接代表了虚拟机所拥有的VCPU数量; cpuSpeed有些特别; 由于虚拟机的VCPU总是和主机上的物理CPU有相同的频率, 这里的cpuSpeed实际上是指在虚拟机管理程序中的VCPU权重（weight）. 虚拟机管理程序不同，对于cpuSpeed的使用和实现也不同.
 
 KVM CPU速度（KVM CPU Speed）
--------------
+--------------------------------
 
 在KVM中, ZStack会使用'cpuSpeed * cpuNum'的结果来设置libvirt的虚拟机XML配置::
 
@@ -112,7 +112,7 @@ KVM CPU速度（KVM CPU Speed）
 .. _instance offering type:
 
 类型（Type）
-++++
++++++++++++++++++
 
 计算规格的类型; 当前有两种计算规格类型:
 
@@ -123,7 +123,7 @@ KVM CPU速度（KVM CPU Speed）
 .. _instance offering allocator strategy:
 
 分配策略（Allocator Strategy）
-++++++++++++++++++
++++++++++++++++++++++++++++++++++++++
 
 分配策略定义了选择用于创建虚拟机的主机的算法.
 
@@ -133,7 +133,7 @@ DefaultHostAllocatorStrategy
 DefaultHostAllocatorStrategy使用下面的算法:
 
 输入参数（Input Parameters）
-****************
+****************++++++++++++++++++
 .. list-table::
    :widths: 30 70
    :header-rows: 1
@@ -150,7 +150,7 @@ DefaultHostAllocatorStrategy使用下面的算法:
      - 用于主机分配的标签
 
 算法（Algorithm）
-*********
+*********+++++++++++++
 
 ::
 
@@ -175,7 +175,7 @@ DesignatedHostAllocatorStrategy
 DesignatedHostAllocatorStrategy使用下面的算法:
 
 输入参数（Input Parameters）
-****************
+****************++++++++++++++++++
 .. list-table::
    :widths: 30 60 10
    :header-rows: 1
@@ -206,7 +206,7 @@ DesignatedHostAllocatorStrategy使用下面的算法:
      - 是
 
 算法（Algorithm）
-*********
+*********+++++++++++++
 
 ::
 
@@ -236,7 +236,7 @@ DesignatedHostAllocatorStrategy使用下面的算法:
 .. _instance offering state:
 
 可用状态（State）
-+++++
+++++++++++++++++++++++++
 
 计算规格有两种可用状态:
 
@@ -248,21 +248,21 @@ DesignatedHostAllocatorStrategy使用下面的算法:
 
   禁用（Disabled）状态下，不允许从计算规格创建虚拟机
 
-----------
+-----------------------
 操作（Operations）
-----------
+-----------------------
 
 .. _CreateInstanceOffering:
 
 创建计算规格（Create Instance Offering）
-========================
+================================================
 
 用户可以使用CreateInstanceOffering来创建一个计算规格. 例如::
 
     CreateInstanceOffering name=small cpuNum=1 cpuSpeed=1000 memorySize=1073741824
 
 参数（Parameters）
-++++++++++
+++++++++++++++++++++++
 
 .. list-table::
    :widths: 20 40 10 20 10
@@ -313,7 +313,7 @@ DesignatedHostAllocatorStrategy使用下面的算法:
 .. _DeleteInstanceOffering:
 
 删除计算规格（Delete Instance Offering）
-========================
+=================================================
 
 用户可以使用DeleteInstanceOffering来删除一个计算规格. 例如::
 
@@ -321,7 +321,7 @@ DesignatedHostAllocatorStrategy使用下面的算法:
 
 
 参数（Parameters）
-++++++++++
+++++++++++++++++++++++
 
 .. list-table::
    :widths: 20 40 10 20 10
@@ -345,14 +345,14 @@ DesignatedHostAllocatorStrategy使用下面的算法:
      - 0.6
 
 改变可用状态（Change State）
-============
+=====================================
 
 用户可以使用ChangeInstanceOfferingState来改变一个计算规格的可用状态. 例如::
 
     ChangeInstanceOfferingState uuid=1164a094fea34f1e8265c802a8048bae stateEvent=enable
 
 参数（Parameters）
-++++++++++
+++++++++++++++++++++++
 
 .. list-table::
    :widths: 20 40 10 20 10
@@ -379,7 +379,7 @@ DesignatedHostAllocatorStrategy使用下面的算法:
      - 0.6
 
 查询计算规格（Query Instance Offering）
-=======================
+================================================
 
 用户可以使用QueryInstanceOffering来查询一个计算规格. 例如::
 
@@ -391,12 +391,12 @@ DesignatedHostAllocatorStrategy使用下面的算法:
 
 
 原生域查询（Primitive Fields of Query）
-+++++++++++++++++++++++++
+++++++++++++++++++++++++++++++++++++++++++++++
 
 请参见 :ref:`instance offering inventory <instance offering inventory>`
 
 嵌套和扩展域查询（Nested and Expanded Fields of Query)
-+++++++++++++++++++++++++++++++++++
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 .. list-table::
    :widths: 20 30 40 10
@@ -411,19 +411,19 @@ DesignatedHostAllocatorStrategy使用下面的算法:
      - 从该计算规格创建的所有虚拟机
      - 0.6
 
-----
+-----------------
 标签（Tags）
-----
+-----------------
 
 用户可以使用resourceType=InstanceOfferingVO在计算规格上创建用户标签. 例如::
 
     CreateUserTag resourceType=InstanceOfferingVO tag=web-server-offering resourceUuid=45f909969ce24865b1bbca4adb66710a
 
 系统标签（System Tags）
-===========
+=============================
 
 专用主存储（Dedicated Primary Storage）
-+++++++++++++++++++++++++
+++++++++++++++++++++++++++++++++++++++++++++++
 
 当创建虚拟机的时候, 用户可以通过系统标签指定从哪个主存储创建根云盘.
 

@@ -1,15 +1,15 @@
 .. _virtual router:
 
-===================================
+=======================================================================
 网络服务和虚拟路由器（Network Services And Virtual Router）
-===================================
+=======================================================================
 
 .. contents:: `目录`
    :depth: 6
 
---------
+--------------------
 概览（Overview）
---------
+--------------------
 
 ZStack支持很多OSI　4 ~ 7层的网络服务: DHCP, DNS, SNAT, EIP, 和端口转发（PortForwarding）.
 L3网络可以启用它所在的L2网络提供的网络服务.
@@ -28,9 +28,9 @@ ZStack提供了一个内建的（builtin）网络服务模块（network service 
 虽然在ZStack当前版本中虚拟机路由器模块是唯一的网络服务模块(除了安全组模块),
 但网络服务框架（network services framework）是高度可插件扩展的（highly pluggable），第三方可以很容易通过一些小插件实现他们自己的功能.
 
-----------------
+-----------------------------------
 网络拓扑（Network typology）
-----------------
+-----------------------------------
 
 一个虚拟机路由器通常包含三个L3网络:
 
@@ -80,9 +80,9 @@ ZStack提供了一个内建的（builtin）网络服务模块（network service 
 
 .. 注意:: 当前ZStack版本不支持VPC.
 
--------------------------------
+--------------------------------------------------------------------
 虚拟机路由器网络服务（Virtual Router Network Services）
--------------------------------
+--------------------------------------------------------------------
 
 在ZStack当前版本中, 虚拟机路由器模块提供了五种网络服务: DHCP, DNS, SNAT, EIP, 以及端口转发; 由于EIP和端口转发有它们自己的API，我们将在专门的章节中介绍它们.
 
@@ -102,14 +102,14 @@ ZStack提供了一个内建的（builtin）网络服务模块（network service 
 
 .. _appliance vm inventory:
 
----------
+----------------------
 清单（Inventory）
----------
+----------------------
 
 除了在:ref:`VM instance inventory <vm inventory>`中提供的属性以外, 虚拟路由器虚拟机还有以下一些额外属性.
 
 属性（Properties）
-==========
+======================
 
 .. list-table::
    :widths: 20 40 10 20 10
@@ -224,21 +224,21 @@ ZStack提供了一个内建的（builtin）网络服务模块（network service 
 
 .. _virtual router offering:
 
------------------------
+---------------------------------------------------
 虚拟路由器规格（Virtual Router Offering）
------------------------
+---------------------------------------------------
 
 虚拟路由器规格是包含额外属性的一个特殊的:ref:`instance offering <instance offering>`.
 
 .. _virtual router offering inventory:
 
 清单（Inventory）
-=========
+=====================
 
 除了在:ref:`instance offering inventory <instance offering inventory>`中提到的属性以外, 虚拟路由器规格还有以下额外的属性:
 
 属性（Properties）
-++++++++++
+++++++++++++++++++++++
 
 .. list-table::
    :widths: 20 40 10 20 10
@@ -297,7 +297,7 @@ ZStack提供了一个内建的（builtin）网络服务模块（network service 
 .. _default offering:
 
 默认规格（Default Offering）
-----------------
+----------------------------------
 
 在一个L3网络上创建一个虚拟路由器时, ZStack需要决定使用哪一个虚拟路由器规格; 决定的策略如下:
 
@@ -309,7 +309,7 @@ ZStack提供了一个内建的（builtin）网络服务模块（network service 
 .. _virtual router image:
 
 镜像（Image）
------
+------------------
 
 虚拟路由器虚拟机可以使用从http://download.zstack.org/templates/zstack-virtualrouter-0.6.qcow2下载的定制的Linux镜像.
 这个Linux操作系统的root密码是::
@@ -325,17 +325,17 @@ ZStack提供了一个内建的（builtin）网络服务模块（network service 
 .. 注意:: 在将来的ZStack版本中, 会支持生成随机的root密码，以提高虚拟路由器虚拟机的安全性.
 
 管理网络和公有网络（Management Network and Public Network）
--------------------------------------
+-----------------------------------------------------------------------
 
 在创建虚拟路由器规格之前, 用户必须首先通过使用:ref:`create L3 network <create L3 network>`创建对应的L3网络.
 用户可以把参数'system'设置true, 来避免从这些网络上创建用户虚拟机.
 
-----------
+-----------------------
 操作（Operations）
-----------
+-----------------------
 
 创建虚拟路由器规格（Create Virtual Router Offering）
-==============================
+===============================================================
 
 用户可以使用CreateVirtualRouterOffering来创建一个虚拟路由器规格. 例如::
 
@@ -346,7 +346,7 @@ ZStack提供了一个内建的（builtin）网络服务模块（network service 
 除了在:ref:`CreateInstanceOffering <CreateInstanceOffering>`中提到的参数以外, 还有以下额外的参数:
 
 参数（Parameters）
-++++++++++
+++++++++++++++++++++++
 
 .. list-table::
    :widths: 20 40 10 20 10
@@ -379,7 +379,7 @@ ZStack提供了一个内建的（builtin）网络服务模块（network service 
      - 0.6
 
 删除虚拟路由器规格（Delete Virtual Router Offering）
-==============================
+================================================================
 
 请参见 :ref:`DeleteInstanceOffering <DeleteInstanceOffering>`
 
@@ -387,7 +387,7 @@ ZStack提供了一个内建的（builtin）网络服务模块（network service 
 .. _ReconnectVirtualRouter:
 
 重连虚拟路由器代理（Reconnect Virtual Router Agent）
-==============================
+================================================================
 
 正如之前提到的一样, 在虚拟路由器虚拟机上有一个Python虚拟路由器代理（Python virtual router agent）.
 用户可以使用ReconnectVirtualRouter来重新初始化从一个ZStack管理节点到一个虚拟路由器虚拟机的连接过程, 这会使得:
@@ -402,7 +402,7 @@ ZStack提供了一个内建的（builtin）网络服务模块（network service 
     ReconnectVirtualRouter vmInstanceUuid=bd1652b1e44144e6b9b5b286b82edb69
 
 参数（Parameters）
-++++++++++
+++++++++++++++++++++++
 
 .. list-table::
    :widths: 20 40 10 20 10
@@ -420,45 +420,45 @@ ZStack提供了一个内建的（builtin）网络服务模块（network service 
      - 0.6
 
 启动虚拟路由器虚拟机（Start Virtual Router VM）
-=======================
+============================================================
 
 请参见 :ref:`StartVmInstance <StartVmInstance>`. 在启动时,
 虚拟路由器虚拟机会执行:ref:`ReconnectVirtualRouter <ReconnectVirtualRouter>`中描述的代理连接过程.
 
 重启虚拟路由器虚拟机（Reboot Virtual Router VM）
-========================
+=============================================================
 
 请参见 :ref:`RebootVmInstance <RebootVmInstance>`. 在重启时,
 虚拟路由器虚拟机会执行 :ref:`ReconnectVirtualRouter <ReconnectVirtualRouter>`中描述的代理连接过程.
 
 停止虚拟路由器虚拟机（Stop Virtual Router VM)
-======================
+=========================================================
 
 请参见 :ref:`StopVmInstance <StopVmInstance>`.
 
 .. 警告:: 虚拟路由器虚拟机停止后, 可能会导致客户L3网络上该虚拟路由器虚拟机服务的虚拟机的网络不工作.
 
 删除虚拟路由器虚拟机（Destroy Virtual Router VM）
-=========================
+==============================================================
 
 请参见 :ref:`DestroyVmInstance <DestroyVmInstance>`.
 
 .. 警告:: 虚拟路由器虚拟机被删除后, 可能会导致客户L3网络上该虚拟路由器虚拟机服务的虚拟机的网络不工作.
 
 迁移虚拟路由器虚拟机（Migrate Virtual Router VM）
-=========================
+==============================================================
 
 请参见 :ref:`MigrateVm <MigrateVm>`.
 
 创建虚拟路由器虚拟机（Create Virtual Router VM）
-========================
+=============================================================
 
 虽然没有现成的API可以手动创建一个虚拟路由器虚拟机, 但是用户在客户L3网络上创建或启动一个虚拟机的时候会自动触发创建一个虚拟路由器虚拟机.
 如果该L3网络没有已经在运行的虚拟路由器虚拟机, 创建或停止/启动一个虚拟机的时候会自动触发创建一个虚拟路由器虚拟机.
 
 
 查询虚拟路由器虚拟机（Query Virtual Router VM）
-=======================
+============================================================
 
 用户可以使用QueryVirtualRouterVm来查询虚拟路由器虚拟机. 例如::
 
@@ -470,12 +470,12 @@ ZStack提供了一个内建的（builtin）网络服务模块（network service 
 
 
 原生域（Primitive Fields）
-++++++++++++++++
++++++++++++++++++++++++++++++++
 
 请参见 :ref:`appliance vm inventory <appliance vm inventory>`.
 
 嵌套和扩展域（Nested And Expanded Fields）
-++++++++++++++++++++++++++
++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 .. list-table::
    :widths: 20 30 40 10
@@ -531,7 +531,7 @@ ZStack提供了一个内建的（builtin）网络服务模块（network service 
      - 0.6
 
 查询虚拟路由器规格（Query Virtual Router Offering）
-=============================
+===============================================================
 
 用户可以使用QueryVirtualRouterOffering来查询虚拟路由器规格. 例如::
 
@@ -542,12 +542,12 @@ ZStack提供了一个内建的（builtin）网络服务模块（network service 
     QueryVirtualRouterOffering managementL3Network.name=systemL3Network image.name=newVirtualRouterImage
 
 原生域（Primitive Fields）
-++++++++++++++++
++++++++++++++++++++++++++++++++
 
 请参见 :ref:`virtual router offering inventory <virtual router offering inventory>`.
 
 嵌套和扩展域（Nested And Expanded Fields）
-++++++++++++++++++++++++++
++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 .. list-table::
    :widths: 20 30 40 10
@@ -574,9 +574,9 @@ ZStack提供了一个内建的（builtin）网络服务模块（network service 
      - 规格所属的区域
      - 0.6
 
----------------------
+----------------------------------------
 全局配置（Global Configurations）
----------------------
+----------------------------------------
 
 .. _agent.deployOnStart:
 
@@ -664,17 +664,17 @@ agent.deployOnStart
 .. 注意:: 在虚拟路由器虚拟机上实际有两个代理, 一个是虚拟路由器代理，另一个是特殊虚拟机代理（appliance VM agent）.
           它们是为了不同的目的, 通常用户不需要关心它们.
 
-----
+-----------------
 标签（Tags）
-----
+-----------------
 
 用户可以使用计算规格章节中和虚拟机章节中提到的方法分别在虚拟路由器规格或虚拟路由器虚拟机上创建用户标签.
 
 系统标签（System Tags）
-===========
+=============================
 
 命令并行度（Parallel Command Level）
-++++++++++++++++++++++
++++++++++++++++++++++++++++++++++++++++++++
 
 管理可以限制在一个虚拟路由器虚拟机上并行执行命令的最大数量.
 
@@ -698,7 +698,7 @@ agent.deployOnStart
 .. _vr tag guestL3Network:
 
 客户L3网络（Guest L3 Network）
-++++++++++++++++
++++++++++++++++++++++++++++++++++++++
 
 管理员可以将虚拟路由器规格绑定到一个客户L3网络, 以指定在该客户L3网络上创建虚拟路由器虚拟机的时候使用哪一个虚拟路由器规格.
 
