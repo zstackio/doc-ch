@@ -453,7 +453,7 @@ API被分为了管理员权限（admin-only）API和非管理员权限（non-adm
 到这里，你的组织结构就创建完成了, 你的组员可以使用他们的用户名口令登录.
 
 权限判断（Permission Evaluation）
-=====================
+================================
 
 一个策略中包含了由申明组成的列表，而每个申明又定义了对于API的访问权限（允许或拒绝）; 用户可以挂载多个策略, 可以挂载到用户上或者他们所在的组上. 
 当用户访问API的时候, 总会优先从用户上挂载的策略开始做判断，之后是他们所属的组上挂载的策略，直到权限被确定(允许或者拒绝). 默认会拒绝没有匹配任何策略的API访问.
@@ -463,20 +463,20 @@ API被分为了管理员权限（admin-only）API和非管理员权限（non-adm
 
 
 默认只读权限策略（Default Read Policy）
-===================
+======================================
 
 当用户被创建时, 一个默认的只读权限策略 **(action: .*:read, effect: Allow)** 会被挂载到新用户上, 因此用户可以查询资源(例如虚拟机, L3网络).
 
--------------
+--------------------------
 管理员账户（Admin Account）
--------------
+--------------------------
 
 在安装好ZStack之后, 默认会创建一个管理员账户(账户名: admin, 口令: password). 系统管理员可以使用这个账户来创建管理员用户, 这些用户拥有和管理员一样的不受限的访问权限, 这样可以允许不同的管理员用他们自己的账号口令登录.
 管理员账户的口令可是使用API*UpdateAccount*来更改.
 
-----------------
+---------------------------
 共享资源（Shared Resources）
-----------------
+---------------------------
 
 一个账户可以共享资源给其他账户. 这对于公有云特别有用, 例如管理员账户可以预定义一些模板 (例如镜像, 计算规格, 云盘规格, l3网络), 这样非管理员账户(通常是客户注册的) 可以使用这些模板来创建虚拟机. 请参见API :ref:`ShareResource <share resources>`.
 
@@ -487,21 +487,21 @@ API被分为了管理员权限（admin-only）API和非管理员权限（non-adm
           也就是说, 其他账户可以查询共享资源并使用他们 (例如使用镜像创建虚拟机)但不能在在这些共享资源上执行操作, 例如, 其他账户不能删除一个共享的镜像.
 
 
-----------
+-----------------
 操作（Operations）
-----------
+-----------------
 
 .. _create account:
 
 创建账户（Create Account）
-==============
+=========================
 
 管理员账户登陆后可以使用CreateAccount创建非管理员账户. 例如::
 
     CreateAccount name=frank password=123456
 
 参数（Parameters）
-----------
+-----------------
 
 .. list-table::
    :widths: 20 40 10 20 10
@@ -541,14 +541,14 @@ API被分为了管理员权限（admin-only）API和非管理员权限（non-adm
 .. _reset account password:
 
 创建用户（Create Users）
-============
+=======================
 
 一个账户可以使用CreateUser来创建一个用户. 例如::
 
     >>>CreateUser name=david password=123456
 
 参数（Parameters）
-----------
+-----------------
 
 .. list-table::
    :widths: 20 40 10 20 10
@@ -588,14 +588,14 @@ API被分为了管理员权限（admin-only）API和非管理员权限（non-adm
 .. _create group:
 
 创建组（Create Groups）
-=============
+======================
 
 一个账户可以使用CreateUserGroup来创建一个组. 例如::
 
     >>>CreateUserGroup name=group
 
 参数（Parameters）
-----------
+-----------------
 
 .. list-table::
    :widths: 20 40 10 20 10
@@ -630,14 +630,14 @@ API被分为了管理员权限（admin-only）API和非管理员权限（non-adm
 .. _create policy:
 
 创建策略（Create Polices）
-==============
+=========================
 
 一个账户可以使用CreatePolicy来创建一个策略. 例如::
 
     >>>CreatePolicy name=all statements='[{"actions":[".*"], "effect":"Allow"}]'
 
 参数（Parameters）
-----------
+-----------------
 
 .. list-table::
    :widths: 20 40 10 20 10
@@ -670,14 +670,14 @@ API被分为了管理员权限（admin-only）API和非管理员权限（non-adm
      - 0.8
 
 添加用户到组中（Add Users into Groups）
-=====================
+======================================
 
 一个账户可以使用AddUserToGroup来添加一个用户到组中. 例如::
 
     >>>AddUserToGroup userUuid=d7646ae8af2140c0a3ccef2ad8da816d groupUuid=92c523a43651442489f8d2d598c7c3da
 
 参数（Parameters）
-----------
+-----------------
 
 .. list-table::
    :widths: 20 40 10 20 10
@@ -700,14 +700,14 @@ API被分为了管理员权限（admin-only）API和非管理员权限（non-adm
      - 0.8
 
 挂载策略到组上（Attach Polices to Groups）
-========================
+=========================================
 
 一个账户可以使用AttachPolicyToUserGroup来挂载一个策略到组上. 例如::
 
     >>>AttachPolicyToUserGroup groupUuid=92c523a43651442489f8d2d598c7c3da policyUuid=afb3bfbb911a42e0a662286728e49891
 
 参数（Parameters）
-----------
+-----------------
 
 .. list-table::
    :widths: 20 40 10 20 10
@@ -730,14 +730,14 @@ API被分为了管理员权限（admin-only）API和非管理员权限（non-adm
      - 0.8
 
 挂载策略到用户上（Attach Polices to Users）
-=======================
+==========================================
 
 账户可以使用AttachPolicyToUser来挂载一个策略到用户上. 例如::
 
     >>>AttachPolicyToUser userUuid=d55c5fba4d1b4533961db9952dc15b00 policyUuid=36c27e8ff05c4780bf6d2fa65700f22e
 
 参数（Parameters）
-----------
+-----------------
 
 .. list-table::
    :widths: 20 40 10 20 10
@@ -759,283 +759,280 @@ API被分为了管理员权限（admin-only）API和非管理员权限（non-adm
      -
      - 0.8
 
-Detach Polices from Groups
-==========================
+从组卸载策略（Detach Polices from Groups）
+=========================================
 
-An account can use DetachPolicyFromUserGroup to detach a policy from a group. For example::
+一个账户可以使用DetachPolicyFromUserGroup来从组卸载一个策略. 例如::
 
     >>>DetachPolicyFromUserGroup groupUuid=f1a092c6914840c9895c564abbc55375 policyUuid=afb3bfbb911a42e0a662286728e49891
 
-Parameters
-----------
+参数（Parameters）
+-----------------
 
 .. list-table::
    :widths: 20 40 10 20 10
    :header-rows: 1
 
-   * - Name
-     - Description
-     - Optional
-     - Choices
-     - Since
+   * - 名字
+     - 描述
+     - 可选的
+     - 可选的参数值
+     - 起始支持版本
    * - **groupUuid**
-     - group uuid
+     - 组的uuid
      -
      -
      - 0.8
    * - **policyUuid**
-     - policy uuid
+     - 策略的uuid
      -
      -
      - 0.8
 
-Detach Polices from Users
-=========================
+从用户卸载策略（Detach Polices from Users）
+==========================================
 
-An account can use DetachPolicyFromUser to detach a policy from a user. For example::
+一个账户可以使用DetachPolicyFromUser来从用户卸载一个策略. 例如::
 
     >>>DetachPolicyFromUser policyUuid=36c27e8ff05c4780bf6d2fa65700f22e userUuid=d7646ae8af2140c0a3ccef2ad8da816d
 
-Parameters
-----------
+参数（Parameters）
+-----------------
 
 .. list-table::
    :widths: 20 40 10 20 10
    :header-rows: 1
 
-   * - Name
-     - Description
-     - Optional
-     - Choices
-     - Since
+   * -名字
+     - 描述
+     - 可选的
+     - 可选的参数值
+     - 起始支持版本
    * - **policyUuid**
-     - policy uuid
+     - 策略的uuid
      -
      -
      - 0.8
    * - **userUuid**
-     - user uuid
+     - 用户的uuid
      -
      -
      - 0.8
 
-Reset Account Password
-======================
+重置账户口令（Reset Account Password）
+=====================================
 
-An account can use UpdateAccount to reset its password. For example::
+一个账户可以使用UpdateAccount来重置它的口令. 例如::
 
     >>>UpdateAccount password=password
 
-Parameters
-----------
+参数（Parameters）
+-----------------
 
 .. list-table::
    :widths: 20 40 10 20 10
    :header-rows: 1
 
-   * - Name
-     - Description
-     - Optional
-     - Choices
-     - Since
+   * - 名字
+     - 描述
+     - 可选的
+     - 可选的参数值
+     - 起始支持版本
    * - **password**
-     - the new password
+     - 新的口令
      -
      -
      - 0.8
    * - **uuid**
-     - the uuid of account to reset the password. It's mainly used by the admin account to reset passwords of other
-       accounts. For non-admin accounts, this field is ignored as ZStack can figure out the account uuid by the
-       current session.
-     - true
+     - 需要重置口令的账户的uuid. 主要用于管理员账户重置其他账户的口令, 由于ZStack可以从当前会话（current session）中获取账户的uuid信息, 因此该域可忽略.
+     - 是
      -
      - 0.8
 
-Reset User Password
-===================
+重置用户口令（Reset User Password）
+==================================
 
-An account or a user can use UpdateUser to reset the password. For example::
+一个账户或一个用户可以使用UpdateUser来重置用户的口令. 例如::
 
     >>>UpdateUser password=password
 
-Parameters
-----------
+参数（Parameters）
+-----------------
 
 .. list-table::
    :widths: 20 40 10 20 10
    :header-rows: 1
 
-   * - Name
-     - Description
-     - Optional
-     - Choices
-     - Since
+   * - 名字
+     - 描述
+     - 可选的
+     - 可选的参数值
+     - 起始支持版本
    * - **password**
-     - the new password
+     - 新的口令
      -
      -
      - 0.8
    * - **uuid**
-     - the user uuid. It's mainly used by the account to change passwords of users. For user changing own
-       password, this field is ignored as ZStack can figure out the user uuid by the current session.
-     - true
+     - 用户的uuid. 主要用于账户更改用户的口令. 用户改变自己的口令时，由于ZStack可以从当前会话（current session）中获取用户的uuid信息, 因此这个域可以忽略For user changing own.
+     - 是
      -
      - 0.8
 
-Delete Groups
-=============
+删除组（Delete Groups）
+======================
 
-An account can use DeleteUserGroup to delete a group. For example::
+一个账户可以使用DeleteUserGroup来删除一个组. 例如::
 
     >>>DeleteUserGroup uuid=bb0e50fe0cfa4ec1af1835f9c210ae8e
 
-Parameters
-----------
+参数（Parameters）
+-----------------
 
 .. list-table::
    :widths: 20 40 10 20 10
    :header-rows: 1
 
-   * - Name
-     - Description
-     - Optional
-     - Choices
-     - Since
+   * - 名字
+     - 描述
+     - 可选的
+     - 可选的参数值
+     - 起始支持版本
    * - **deleteMode**
-     - see :ref:`delete resource`
-     - true
+     - 请参见 :ref:`delete resource`
+     - 是
      - - Permissive
        - Enforcing
      - 0.8
    * - **uuid**
-     - group uuid
+     - 组的uuid
      -
      -
      - 0.8
 
-Delete Users
-============
+删除用户（Delete Users）
+=======================
 
-An account can use DeleteUser to delete a user. For example::
+一个账户可以使用DeleteUser来删除一个用户. 例如::
 
     >>>DeleteUser uuid=fa4ec1af1835f9c210ae8e
 
-Parameters
-----------
+参数（Parameters）
+-----------------
 
 .. list-table::
    :widths: 20 40 10 20 10
    :header-rows: 1
 
-   * - Name
-     - Description
-     - Optional
-     - Choices
-     - Since
+   * - 名字
+     - 描述
+     - 可选的
+     - 可选的参数值
+     - 起始支持版本
    * - **deleteMode**
-     - see :ref:`delete resource`
-     - true
+     - 请参见 :ref:`delete resource`
+     - 是
      - - Permissive
        - Enforcing
      - 0.8
    * - **uuid**
-     - user uuid
+     - 用户的uuid
      -
      -
      - 0.8
 
-Delete Policies
-===============
+删除策略（Delete Policies）
+==========================
 
-An account can use DeletePolicy to delete a policy. For example::
+一个账户可以使用DeletePolicy来删除一个策略. 例如::
 
     >>>DeletePolicy uuid=bb0e50fe0cfa4ec1af1835f9c210ae8e
 
-Parameters
-----------
+参数（Parameters）
+-----------------
 
 .. list-table::
    :widths: 20 40 10 20 10
    :header-rows: 1
 
-   * - Name
-     - Description
-     - Optional
-     - Choices
-     - Since
+   * - 名字
+     - 描述
+     - 可选的
+     - 可选的参数值
+     - 起始支持版本
    * - **deleteMode**
-     - see :ref:`delete resource`
-     - true
+     - 请参见 :ref:`delete resource`
+     - 是
      - - Permissive
        - Enforcing
      - 0.8
    * - **uuid**
-     - policy uuid
+     - 策略的uuid
      -
      -
      - 0.8
 
-Delete Accounts
-===============
+删除账户（Delete Accounts）
+==========================
 
-The admin account can use DeleteAccount to delete an non-admin account. For example::
+管理员账户可以使用DeleteAccount来删除一个非管理员账户. 例如::
 
     >>>DeleteAccount uuid=bb0e50fe0cfa4ec1af1835f9c210ae8e
 
-Parameters
-----------
+参数（Parameters）
+-----------------
 
 .. list-table::
    :widths: 20 40 10 20 10
    :header-rows: 1
 
-   * - Name
-     - Description
-     - Optional
-     - Choices
-     - Since
+   * - 名字
+     - 描述
+     - 可选的
+     - 可选的参数值
+     - 起始支持版本
    * - **deleteMode**
-     - see :ref:`delete resource`
-     - true
+     - 请参见 :ref:`delete resource`
+     - 是
      - - Permissive
        - Enforcing
      - 0.8
    * - **uuid**
-     - account uuid
+     - 账户的uuid
      -
      -
      - 0.8
 
-.. warning:: After deleting, all resources owned by the account will be deleted as well
+.. 警告:: 账户删除后, 所有该账户拥有的资源也都会被删除
 
 .. _update quota:
 
-Update Account Quota
-====================
+更新账户配额（Update Account Quota）
+===================================
 
-The admin account can use UpdateQuota to update an account's quotas. For example::
+管理员账户可以使用UpdateQuota来更新一个账户的配额. 例如::
 
     >>>UpdateQuota identityUuid=bb0e50fe0cfa4ec1af1835f9c210ae8e name=vm.num value=100
 
-Parameters
-----------
+参数（Parameters）
+-----------------
 
 .. list-table::
    :widths: 20 40 10 20 10
    :header-rows: 1
 
-   * - Name
-     - Description
-     - Optional
-     - Choices
-     - Since
+   * - 名字
+     - 描述
+     - 可选的
+     - 可选的参数值
+     - 起始支持版本
    * - **identityUuid**
-     - the account uuid
+     - 账户的uuid
      -
      -
      - 0.8
    * - **name**
-     - quota name
+     - 配额的名字（quota name）
      -
      - - vip.num
        - securityGroup.num
@@ -1051,48 +1048,48 @@ Parameters
 
 .. _share resources:
 
-Share Resources
-===============
+共享资源（Share Resources）
+==========================
 
-An account can use ShareResource to share resources to other accounts. For example::
+一个账户可以使用ShareResource来将资源共享其他账户. 例如::
 
     ShareResource accountUuids=bb0e50fe0cfa4ec1af1835f9c210ae8e,bb0e50fe0cfa4ec1af1835f9c210ae8e resourceUuids=b0662d80cc4945f8abaf6d1096da9eb5,d55c5fba4d1b4533961db9952dc15b00
 
-Parameters
-----------
+参数（Parameters）
+-----------------
 
 .. list-table::
    :widths: 20 40 10 20 10
    :header-rows: 1
 
-   * - Name
-     - Description
-     - Optional
-     - Choices
-     - Since
+   * - 名字
+     - 描述
+     - 可选的
+     - 可选的参数值
+     - 起始支持版本
    * - **accountUuids**
-     - a list of account uuids to which the resources are shared. If omitted, the *toPublic* must be set to true
-     - true
+     - 将资源共享至该列表中uuid指定的账户. 仅当*toPublic*被设置为true时, 该参数才能被忽略 
+     - 是
      -
      - 0.8
    * - **resourceUuids**
-     - a list of resource uuids
+     - 资源uuid的列表
      -
      -
      - 0.8
    * - **toPublic**
-     - if set to true, resources are shared to all accounts
-     - true
+     - i如果设置为true, 资源会被共享给所有账户
+     - 是
      - - true
        - false
      - 0.8
 
 .. _revoke sharing:
 
-Revoke Shared Resources
-=======================
+召回共享资源（Revoke Shared Resources）
+======================================
 
-An account can use RevokeResourceSharing to revoke shared resources from accounts. For example::
+一个账户可以使用RevokeResourceSharing来从账户召回共享的资源. 例如::
 
     RevokeResourceSharing accountUuids=bb0e50fe0cfa4ec1af1835f9c210ae8e resourceUuids=b0662d80cc4945f8abaf6d1096da9eb5,d55c5fba4d1b4533961db9952dc15b00
 
@@ -1104,47 +1101,46 @@ An account can use RevokeResourceSharing to revoke shared resources from account
 
     RevokeResourceSharing resourceUuids=b0662d80cc4945f8abaf6d1096da9eb5 toPublic=true
 
-Parameters
-----------
+参数（Parameters）
+-----------------
 
 .. list-table::
    :widths: 20 40 10 20 10
    :header-rows: 1
 
-   * - Name
-     - Description
-     - Optional
-     - Choices
-     - Since
+   * - 名字
+     - 描述
+     - 可选的
+     - 可选的参数值
+     - 起始支持版本
    * - **accountUuids**
-     - the accounts from which the shared resources are revoked. When field *all* is set, this field is ignored,
-       as the resources will be revoked from all accounts to which the resources have been shared.
-     - true
+     - 该参数指定了从哪些账户召回共享的资源. 仅当域*all*设置时才能忽略这个域,
+       因为资源会从所有账户那里召回.
+     - 是
      -
      - 0.6
    * - **resourceUuids**
-     - resources to be revoked from accounts
+     - 指定哪些资源被召回
      -
      -
      - 0.6
    * - **all**
-     - if set, the resources will be revoked from all accounts to which the resources have been shared.
-     - true
+     - 如果该参数被设置为true, 资源会从所有账户那里召回.
+     - 是
      - - true
        - false
      - 0.6
    * - **toPublic**
-     - if the resources are shared with 'toPublic = true' when calling ShareResource, this field must be also set
-       to true when revoking.
-     - true
+     - 如果在调用ShareResource共享资源时时指定了'toPublic = true', 在召回该资源时也必须将这个域设置为true.
+     - 是
      - - true
        - false
      - 0.6
 
-Query Accounts
-==============
+查询账户（Query Accounts）
+=========================
 
-An account can use QueryAccount query its own, or the admin account can query all accounts. For example::
+一个账户可以使用QueryAccount来查询它自己的账户, 而管理员账户则可以查询所有账户. 例如::
 
     >>>QueryAccount name=test
 
@@ -1152,43 +1148,43 @@ An account can use QueryAccount query its own, or the admin account can query al
 
     >>>QueryAccount group.name=group1
 
-Primitive Fields of Query
-+++++++++++++++++++++++++
+原生域查询（Primitive Fields of Query）
+++++++++++++++++++++++++++++++++++++++
 
-see :ref:`account inventory <account inventory>`
+请参见 :ref:`account inventory <account inventory>`
 
-Nested And Expanded Fields of Query
-+++++++++++++++++++++++++++++++++++
+嵌套和扩展域查询（Nested And Expanded Fields of Query）
+++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 .. list-table::
    :widths: 20 30 40 10
    :header-rows: 1
 
-   * - Field
-     - Inventory
-     - Description
-     - Since
+   * - 域（Field）
+     - 清单（Inventory）
+     - 描述
+     - 起始支持版本
    * - **group**
      - :ref:`group inventory <group inventory>`
-     - child group
+     - 所拥有的组
      - 0.6
    * - **user**
      - :ref:`user inventory <user inventory>`
-     - child user
+     - 所拥有的用户
      - 0.6
    * - **policy**
      - :ref:`policy inventory <policy inventory>`
-     - child policy
+     - 所拥有的策略
      - 0.6
    * - **quota**
      -
-     - child quota
+     - 所拥有的配额
      - 0.6
 
-Query Users
-===========
+查询用户（Query Users）
+======================
 
-An account can use QueryUser to query users. For example::
+一个账户可以使用QueryUser来查询用户. 例如::
 
     >>>QueryUser name=frank
 
@@ -1196,39 +1192,39 @@ An account can use QueryUser to query users. For example::
 
     >>>QueryUser name=frank policy.name=allow
 
-Primitive Fields of Query
-+++++++++++++++++++++++++
+原生域查询（Primitive Fields of Query）
+++++++++++++++++++++++++++++++++++++++
 
-see :ref:`user inventory <user inventory>`
+请参见 :ref:`user inventory <user inventory>`
 
-Nested And Expanded Fields of Query
-+++++++++++++++++++++++++++++++++++
+嵌套和扩展域查询（Nested And Expanded Fields of Query）
+++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 .. list-table::
    :widths: 20 30 40 10
    :header-rows: 1
 
-   * - Field
-     - Inventory
-     - Description
-     - Since
+   * - 域（Field）
+     - 清单（Inventory）
+     - 描述
+     - 起始支持版本
    * - **account**
-     - see :ref:`account inventory <account inventory>`
-     - the parent account
+     - 请参见 :ref:`account inventory <account inventory>`
+     - 所属的账户
      - 0.6
    * - **group**
-     - see :ref:`group inventory <group inventory>`
-     - the group the user is in
+     - 请参见 :ref:`group inventory <group inventory>`
+     - 用户所属的组
      - 0.6
    * - **policy**
-     - see :ref:`policy inventory <policy inventory>`
-     - the policy attached to the user
+     - 请参见 :ref:`policy inventory <policy inventory>`
+     - 该用户挂载的策略
      - 0.6
 
-Query Policy
-============
+查询策略（Query Policy）
+=======================
 
-An account can use QueryPolicy to query policies. For example::
+一个账户可以使用QueryPolicy来查询策略. 例如::
 
     >>>QueryPolicy name=vm-management
 
@@ -1236,39 +1232,39 @@ An account can use QueryPolicy to query policies. For example::
 
     >>>QueryPolicy user.name=frank
 
-Primitive Fields of Query
-+++++++++++++++++++++++++
+原生域查询（Primitive Fields of Query）
+++++++++++++++++++++++++++++++++++++++
 
-see :ref:`policy inventory <policy inventory>`
+请参见 :ref:`policy inventory <policy inventory>`
 
-Nested And Expanded Fields of Query
-+++++++++++++++++++++++++++++++++++
+嵌套和原生域查询（Nested And Expanded Fields of Query）
+++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 .. list-table::
    :widths: 20 30 40 10
    :header-rows: 1
 
-   * - Field
-     - Inventory
-     - Description
-     - Since
+   * - 域（Field）
+     - 清单（Inventory）
+     - 描述
+     - 起始支持版本
    * - **account**
-     - see :ref:`account inventory <account inventory>`
-     - the parent account
+     - 请参见 :ref:`account inventory <account inventory>`
+     - 所属账户
      - 0.6
    * - **group**
-     - see :ref:`group inventory <group inventory>`
-     - groups the policy attached
+     - 请参见 :ref:`group inventory <group inventory>`
+     - 该策略所挂载的组
      - 0.6
    * - **user**
-     - see :ref:`user inventory <user inventory>`
-     - users the policy attached
+     - 请参见 :ref:`user inventory <user inventory>`
+     - 该策略所挂载的用户
      - 0.6
 
-Query Groups
-============
+查询组（Query Groups）
+=====================
 
-An account can use QueryUserGroup to query groups. For example::
+一个账户可以使用QueryUserGroup来查询组. 例如::
 
     >>>QueryUserGroup name=group1
 
@@ -1276,43 +1272,43 @@ An account can use QueryUserGroup to query groups. For example::
 
     >>>QueryUserGroup user.name=frank
 
-Primitive Fields of Query
-+++++++++++++++++++++++++
+原生域查询（Primitive Fields of Query）
+++++++++++++++++++++++++++++++++++++++
 
-see :ref:`group inventory <group inventory>`
+请参见 :ref:`group inventory <group inventory>`
 
-Nested And Expanded Fields of Query
-+++++++++++++++++++++++++++++++++++
+嵌套和扩展域查询（Nested And Expanded Fields of Query）
+++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 .. list-table::
    :widths: 20 30 40 10
    :header-rows: 1
 
-   * - Field
-     - Inventory
-     - Description
-     - Since
+   * - 域（Field）
+     - 清单（Inventory）
+     - 描述
+     - 起始支持版本
    * - **account**
-     - see :ref:`account inventory <account inventory>`
-     - the parent account
+     - 请参见 :ref:`account inventory <account inventory>`
+     - 所属账户
      - 0.6
    * - **user**
-     - see :ref:`user inventory <user inventory>`
-     - users in the group
+     - 请参见 :ref:`user inventory <user inventory>`
+     - 该组中的用户
      - 0.6
    * - **policy**
-     - see :ref:`policy inventory <policy inventory>`
-     - the policy attached to the group
+     - 请参见 :ref:`policy inventory <policy inventory>`
+     - 该组上挂载的策略
      - 0.6
 
----------
-Reference
----------
+--------------------
+参考信息（Reference）
+--------------------
 
 .. _admin-only APIs:
 
-Admin-only APIs
-===============
+管理员权限API（Admin-only APIs）
+===============================
 
 ::
 
@@ -1398,8 +1394,8 @@ Admin-only APIs
 
 .. _non-admin APIs:
 
-Non-admin APIs
-==============
+非管理员权限API（Non-admin APIs）
+================================
 
 ::
 
@@ -1545,8 +1541,8 @@ Non-admin APIs
 
 .. _api identities:
 
-API Identities
-==============
+API标识（API Identities）
+========================
 
 ::
 
@@ -1805,54 +1801,54 @@ API Identities
 
 .. _default quotas:
 
-Default Quotas
-==============
+默认配额（Default Quotas）
+=========================
 
 .. list-table::
    :widths: 20 40 20 20
    :header-rows: 1
 
-   * - Name
-     - Description
-     - Value
-     - Since
+   * - 名字
+     - 描述
+     - 值
+     - 起始支持版本
    * - **vip.num**
-     - max number of VIPs
+     - VIP的最大数量
      - 20
      - 0.8
    * - **securityGroup.num**
-     - max number of security groups
+     - 安全组的最大数量
      - 20
      - 0.8
    * - **l3.num**
-     - max number of L3 networks
+     - L3网络的最大数量
      - 20
      - 0.8
    * - **portForwarding.num**
-     - max number of port forwarding rules
+     - m端口转发规则的最大数量
      - 20
      - 0.8
    * - **vm.num**
-     - max number of VMs
+     - 虚拟机的最大数量
      - 20
      - 0.8
    * - **vm.cpuNum**
-     - max number of VCPU cores
+     - VCPU核的最大数量
      - 80
      - 0.8
    * - **vm.memorySize**
-     - total size of memory
+     - 总内存大小
      - 85899345920 bytes (80G)
      - 0.8
    * - **volume.data.num**
-     - max number of data volumes
+     - 数据云盘的最大容量
      - 40
      - 0.8
    * - **volume.capacity**
-     - total volume capacity of both data volumes and root volumes
+     - 数据云盘和根云盘的最大总容量
      - 10995116277760 bytes (10T)
      - 0.8
    * - **eip.num**
-     - max number of EIPs
+     - EIP的最大数量
      - 20
      - 0.8
