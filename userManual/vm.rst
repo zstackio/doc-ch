@@ -233,7 +233,7 @@ hostUuid会被设置为NULL, zoneUuid和clusterUuid会保持不变. lastHostUuid
     default via 10.10.1.1 dev eth0
     10.10.1.0/24 dev eth0  proto kernel  scope link  src 10.10.1.99
     192.168.0.0/24 dev eth1  proto kernel  scope link  src 192.168.0.10
-    172.16.0.0/24 dev eth0  proto kernel  scope link  src 172.16.0.55
+    172.16.0.0/24 dev eth2  proto kernel  scope link  src 172.16.0.55
 
 可见，默认路由（default routing）指向了**10.10.1.1**，也就是默认L3网络的网关; 同时虚拟机的/etc/resolv.conf如下所示:
 
@@ -310,7 +310,7 @@ hostUuid会被设置为NULL, zoneUuid和clusterUuid会保持不变. lastHostUuid
      -
      - 0.6
 
-在ZStack当前版本中, 一旦虚拟机的网卡被分配了IP地址, 这个IP地址将一直伴随这个网卡知道虚拟机被删除.
+在ZStack当前版本中, 一旦虚拟机的网卡被分配了IP地址, 这个IP地址将一直伴随这个网卡直到虚拟机被删除.
 
 示例
 *******
