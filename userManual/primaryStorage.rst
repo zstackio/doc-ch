@@ -1,15 +1,15 @@
 .. _primary storage:
 
-===============
+==============================
 主存储（Primary Storage）
-===============
+==============================
 
 .. contents:: `目录`
    :depth: 6
 
---------
+--------------------
 概览（Overview）
---------
+--------------------
 
 主存储是数据中心里为虚拟机提供磁盘云盘的存储系统. 主存储可以是本地磁盘（local disks，例如主机的硬盘) 或者网络共享存储（network shared storage, 例如NAS, SAN ).
 
@@ -24,12 +24,12 @@
 
 .. _primary storage inventory:
 
----------
+----------------------
 清单（Inventory）
----------
+----------------------
 
 属性（Properties）
-==========
+======================
 
 .. list-table::
    :widths: 20 40 10 20 10
@@ -141,14 +141,14 @@
 .. _primary storage capacity:
 
 容量（Capacity）
-++++++++
+++++++++++++++++++++
 
 为了方便选择合适的主存储创建云盘, ZStack会监控主存储的容量. 不同的主存储插件可能会汇报不同的磁盘容量;
 例如, 对于支持超分（over-provisioning）的主存储, 汇报的存储容量会比实际的大;
 对于不支持超分的主存储, 汇报的存储容量可能会小于或等于实际的大小.
 
 NFS容量（NFS Capacity）
-------------
+---------------------------
 
 NFS不支持超分, 因此它的容量是用云盘的虚拟大小（volumes' virtual sizes）根据以下公式计算出来的::
 
@@ -166,7 +166,7 @@ NFS不支持超分, 因此它的容量是用云盘的虚拟大小（volumes' vir
 主存储需要使用URL字符串存储的信息来控制存储系统. 虽然名字叫URL, 具体的字符串存储格式依据主存储的类型而定，并不完全等同于标准的URL规范, 这样可以给插件更多的灵活性以存储一些不方便以URL格式存储的信息.
 
 NFS主存储URL
--------
+----------------
 
 对于NFS主存储, URL被编码为下面的格式::
 
@@ -180,7 +180,7 @@ NFS主存储URL
 .. _primary storage state:
 
 可用状态（State）
-=====
+========================
 
 主存储有两种可用状态:
 
@@ -195,7 +195,7 @@ NFS主存储URL
 .. _primary storage status:
 
 连接状态（Status）
-======
+=========================
 
 类似于 :ref:`host status <host status>`, 主存储的连接状态反应了管理节点和主存储之间的命令通道的状态. 命令通道是管理节点和主存储所代表的存储系统通信的途径;
 根据主存储类型的不同命令通道也可以不同, 例如, 命令通道可以是ZStack管理节点和主存储之间的HTTP连接或者存储SDK（storage SDKs）提供的通信方法.
@@ -226,14 +226,14 @@ NFS主存储URL
    :align: center
 
 可用状态（State）和连接状态（Status）
-================
+===================================================
 
 可用状态和连接状态之间没有直接关系. 可用状态代表了管理员针对主存储的意愿, 而连接状态代表了主存储的通信状况.
 
 .. _primary storage attached cluster:
 
 挂载集群（Attaching Cluster）
-=================
+====================================
 
 挂载集群是将主存储和兄弟集群（sibling clusters）关联, 从而提供了一种灵活的方式维护主机和存储系统在实际数据中心里的关系.
 我们来看一个实际的例子; 假设有一个集群(集群A)挂载了一个NFS主存储 (NFS1), 如下图所示:
@@ -257,24 +257,24 @@ NFS主存储URL
 .. image:: primary-storage-cluster4.png
    :align: center
 
-----------
+-----------------------
 操作（Operations）
-----------
+-----------------------
 
 添加主存储（Add Primary Storage）
-===================
+========================================
 
 不同主存储类型，添加的命令不同.
 
 添加NFS主存储（Add NFS Primary Storage）
-+++++++++++++++++++++++
++++++++++++++++++++++++++++++++++++++++++++++++
 
 管理员可以使用AddNfsPrimaryStorage添加一个NFS主存储. 例如::
 
     AddNfsPrimaryStorage name=nfs1 zoneUuid=1b830f5bd1cb469b821b4b77babfdd6f url=192.168.0.220:/storage/nfs
 
 属性（Properties）
-----------
+----------------------
 
 .. list-table::
    :widths: 20 40 10 20 10
@@ -312,7 +312,7 @@ NFS主存储URL
      - 0.6
 
 删除主存储（Delete Primary Storage）
-======================
+============================================
 
 管理员可以使用DeletePrimaryStorage来删除一个主存储. 例如::
 
@@ -321,7 +321,7 @@ NFS主存储URL
 .. 危险:: 删除一个主存储会导致所有该主存储包含的云盘和云盘快照（volume snapshots）被删除. 虚拟机也会因为根云盘（root volumes）被删除而被删除. 没有办法可以恢复已经删除的主存储. 挂载的集群也会被卸载.
 
 属性（Properties）
-++++++++++
+++++++++++++++++++++++
 
 .. list-table::
    :widths: 20 40 10 20 10
@@ -345,14 +345,14 @@ NFS主存储URL
      - 0.6
 
 改变主存储的可用状态（Change Primary Storage State）
-============================
+=================================================================
 
 管理员可以使用ChangePrimaryStorageState来改变一个主存储的可用状态. 例如::
 
     ChangePrimaryStorageState stateEvent=enable uuid=2c830f5bd1cb469b821b4b77babfdd6f
 
 属性（Properties）
-++++++++++
+++++++++++++++++++++++
 
 .. list-table::
    :widths: 20 40 10 20 10
@@ -379,18 +379,18 @@ NFS主存储URL
      - 0.6
 
 挂载集群（Attach Cluster）
-==============
+=================================
 
 请参见 :ref:`attach primary storage to cluster`.
 
 
 卸载集群（Detach Cluster）
-==============
+=================================
 
 请参见 :ref:`detach primary storage from cluster`.
 
 查询主存储（Query Primary Storage）
-=====================
+===========================================
 
 管理员可以使用QueryPrimaryStorage来查询主存储. 例如::
 
@@ -401,12 +401,12 @@ NFS主存储URL
     QueryPrimaryStorage volumeSnapshot.uuid?=13238c8e0591444e9160df4d3636be82,33107835aee84c449ac04c9622892dec
 
 原生域查询（Primitive Fields of Query）
-+++++++++++++++++++++++++
+++++++++++++++++++++++++++++++++++++++++++++++
 
 请参见 :ref:`primary storage inventory <primary storage inventory>`
 
 嵌套和扩展域查询（Nested And Expanded Fields of Query）
-+++++++++++++++++++++++++++++++++++
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 .. list-table::
    :widths: 20 30 40 10
@@ -433,9 +433,9 @@ NFS主存储URL
      - 挂载了该主存储的集群
      - 0.6
 
----------------------
+----------------------------------------
 全局配置（Global Configurations）
----------------------
+----------------------------------------
 
 .. _mount.base:
 
@@ -459,19 +459,19 @@ NFS主存储在KVM主机上的挂载点（mount point）.
 
 .. 注意:: 改变这个值只会影响新的NFS主存储
 
-----
+-----------------
 标签（Tags）
-----
+-----------------
 
 用户可以使用resourceType=PrimaryStorageVO在主存储上创建用户标签. 例如::
 
     CreateUserTag resourceType=PrimaryStorage tag=SSD resourceUuid=e084dc809fec4092ab0eff797d9529d5
 
 系统标签（System Tags）
-===========
+=============================
 
 存储云盘快照（Storage Volume Snapshot）
-+++++++++++++++++++++++
++++++++++++++++++++++++++++++++++++++++++++++++
 
 .. list-table::
    :widths: 20 30 40 10

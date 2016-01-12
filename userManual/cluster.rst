@@ -1,15 +1,15 @@
 .. _cluster:
 
-=======
+===================
 集群（Cluster）
-=======
+===================
 
 .. contents:: `目录`
    :depth: 6
 
---------
+--------------------
 概览（Overview）
---------
+--------------------
 
 一个集群是类似主机（Host）组成的逻辑组. 在同一个集群中的主机必须安装相同的操作系统(虚拟机管理程序,hypervisor), 拥有相同的二层网络连接, 可以访问相同的主存储. 
 在实际的数据中心, 一个集群通常对应一个机架（rack）.
@@ -29,12 +29,12 @@
 
 .. _cluster inventory:
 
----------
+--------------------
 清单（Inventory)
----------
+--------------------
 
 属性（Properties）
-==========
+======================
 
 .. list-table::
    :widths: 20 40 10 20 10
@@ -124,33 +124,33 @@
 .. _cluster hypervisor type:
 
 虚拟机管理程序类型（Hypervisor Type）
-===============
+=================================================
 
 虚拟机管理程序类型指明了哪种虚拟机管理程序（操作系统, operating system）被安装在集群中的主机上. 在当前ZStack版本中, 仅支持KVM管理程序.
 
 .. _cluster state:
 
 可用状态（State）
-=====
+========================
 
 集群有两种可用状态: 启用（Enabled）和禁用（Disabled）, 类似于 :ref:`zone <zone>`. 当改变集群的可用状态时, 操作会被迭代到集群中的所有主机;
 例如, 禁用一个集群也会禁用集群中的所有主机.
 
 .. 注意:: 管理员可以有选择的启用已经禁用的集群中的某些主机,或者有选择的禁用已经其中的集群中的某些主机, 以达到用更好的粒度来控制可用状态.
 
-----------
+-----------------------
 操作（Operations）
-----------
+-----------------------
 
 创建集群（Create Cluster)
-==============
+==============================
 
 管理员可以使用CreateCluster命令来创建一个集群. 例如::
 
     CreateCluster name=cluster1 hypervisorType=KVM zoneUuid=1b830f5bd1cb469b821b4b77babfdd6f
 
 参数（Parameters）
-++++++++++
+++++++++++++++++++++++
 
 .. list-table::
    :widths: 20 40 10 20 10
@@ -193,7 +193,7 @@
      - 0.6
 
 删除集群（Delete Cluster）
-==============
+=================================
 
 管理员可以使用DeleteCluster命令来删除一个集群. 例如::
 
@@ -203,7 +203,7 @@
             挂载的主存储和L2网络也会被卸载. 没有办法可以恢复一个已经删除的集群.
 
 参数（Parameters）
-++++++++++
+++++++++++++++++++++++
 
 .. list-table::
    :widths: 20 40 10 20 10
@@ -227,14 +227,14 @@
      - 0.6
 
 改变可用状态（Change State）
-============
+=====================================
 
 管理员可以使用ChangeClusterState来改变一个集群的可用状态. 例如::
 
     ChangeClusterState uuid=c1bd173d5cd84f0e9e7c47195ae27ec6 stateEvent=disable
 
 参数（Parameters）
-++++++++++
+++++++++++++++++++++++
 
 .. list-table::
    :widths: 20 40 10 20 10
@@ -263,7 +263,7 @@
 .. _attach primary storage to cluster:
 
 挂载主存储（Attach Primary Storage）
-======================
+============================================
 
 管理员可以使用AttachPrimaryStorageToCluster命令来挂载主存储到集群. 例如::
 
@@ -272,7 +272,7 @@
 .. 注意:: 只有兄弟主存储（sibling primary storage）可以被挂载到集群. 换言之, 主存储和集群必须在同一个区域中.
 
 参数（Parameters）
-++++++++++
+++++++++++++++++++++++
 
 .. list-table::
    :widths: 20 40 10 20 10
@@ -297,7 +297,7 @@
 .. _detach primary storage from cluster:
 
 卸载主存储（Detach Primary Storage）
-======================
+============================================
 
 管理员可以使用DetachPrimaryStorageFromCluster命令从集群卸载一个主存储. 例如::
 
@@ -309,7 +309,7 @@
 由于老的集群已经不能再访问主存储, ZStack会选择新的集群启动这些虚拟机.
 
 参数（Parameters）
-++++++++++
+++++++++++++++++++++++
 
 .. list-table::
    :widths: 20 40 10 20 10
@@ -334,7 +334,7 @@
 .. _cluster attach L2 Network:
 
 挂载（Attach L2 Network）
-=================
+==============================
 
 管理员可以使用AttachL2NetworkToCluster来挂载一个L2网络到集群. 例如::
 
@@ -343,7 +343,7 @@
 .. 注意:: 只有兄弟（sibling）L2网络可以挂载到集群. 换言之, L2网络和集群需要在同一个区域中.
 
 参数（Parameters）
-++++++++++
+++++++++++++++++++++++
 
 .. list-table::
    :widths: 20 40 10 20 10
@@ -368,7 +368,7 @@
 .. _cluster detach L2 network:
 
 卸载L2网络（Detach L2 Network)
-=================
+====================================
 
 管理员可以使用DetachL2NetworkFromCluster来从集群卸载一个L2网络. 例如::
 
@@ -379,7 +379,7 @@
 当管理员需要在数据中心改变网络拓扑结构的时候可以利用卸载L2网络. 当集群中没有主机还连在物理二层网络时,管理员可以从集群中卸载代表这个物理二层网络的L2网络.
 
 参数（Parameters）
-++++++++++
+++++++++++++++++++++++
 
 .. list-table::
    :widths: 20 40 10 20 10
@@ -402,7 +402,7 @@
      - 0.6
 
 查询集群（Query Cluster——
-=============
+===================================
 
 管理员可以使用QueryCluster命令来查询集群. 例如::
 
@@ -413,12 +413,12 @@
     QueryCluster primaryStorage.availableCapacity>100000000
 
 原生域查询（Primitive Fields of Query）
-+++++++++++++++++++++++++
+++++++++++++++++++++++++++++++++++++++++++++++
 
 请参见 :ref:`cluster inventory <cluster inventory>`
 
 嵌套和扩展查询（Nested And Expanded Fields of Query）
-+++++++++++++++++++++++++++++++++++
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 .. list-table::
    :widths: 20 30 40 10
@@ -449,21 +449,21 @@
      - 这个集群挂载的主存储
      - 0.6
 
-----
+-----------------
 标签（Tags）
-----
+-----------------
 
 管理员可以使用resourceType=ClusterVO在集群上创建用户标签. 例如::
 
     CreateUserTag resourceType=ClusterVO resourceUuid=80a979b9e0234564a22a4cca8c1dff43 tag=secureCluster
 
 系统标签（System Tags）
-===========
+=============================
 
 .. _cluster.host.reservedMemory:
 
 保留的容量（Reserved Capacity）
-+++++++++++++++++
+++++++++++++++++++++++++++++++++++++++
 
 .. list-table::
    :widths: 20 30 40 10

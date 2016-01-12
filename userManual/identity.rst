@@ -1,16 +1,16 @@
 .. _identity:
 
-===================
+==========================
 身份认证（Identity）
-===================
+==========================
 
 .. contents:: `目录`
    :depth: 6
 
 
----------------
+--------------------
 概览（Overview）
----------------
+--------------------
 
 ZStack的身份认证服务（identity service）负责提供ZStack资源的访问控制（ access control）. 系统中定义了账户（account）, 用户（user）, 组（group）, 策略（policy）, 和配额（quota）等概念. 身份认证系统的整体结构如图所示:
 
@@ -20,7 +20,7 @@ ZStack的身份认证服务（identity service）负责提供ZStack资源的访�
 .. _account:
 
 账户（Account）
-==============
+===================
 
 人们需要创建作为拥有所有他们资源的根身份认证（root identity）的账户, 才能对资源实施操作. 有两种账户类型: 管理员（admin）和普通用户（normal）. 
 管理员账户拥有不受限的权限, 通常由系统管理管理员拥有.
@@ -30,7 +30,7 @@ API被分为了管理员权限（admin-only）API和非管理员权限（non-adm
 在:ref:`non-admin APIs <non-admin APIs>`中可以找到非管理员权限API的列表.
 
 账户的清单（Account Inventory）
-------------------------------
+--------------------------------------
 
 .. list-table::
    :widths: 20 40 10 20 10
@@ -85,13 +85,13 @@ API被分为了管理员权限（admin-only）API和非管理员权限（non-adm
 
 
 用户（Users）
-============
+==================
 
 由于非管理员权限账户拥有对其所拥有资源的不受限权限, 创建的用户可以用来实现更细粒度（finely-grained）的权限控制. 
 用户只可以使用:ref:`policies <policy>`中指派（assigned）的API.
 
 用户的清单（User Inventory）
----------------------------
+-----------------------------------
 
 .. list-table::
    :widths: 20 40 10 20 10
@@ -151,12 +151,12 @@ API被分为了管理员权限（admin-only）API和非管理员权限（non-adm
   }
 
 组（Groups）
-===========
+================
 
 账户可以创建组来管理用户. 通过给组指定策略, 账户可以为一个组的用户设置相同的权限.
 
 组的清单（Group Inventory）
---------------------------
+---------------------------------
 
 .. list-table::
    :widths: 20 40 10 20 10
@@ -213,12 +213,12 @@ API被分为了管理员权限（admin-only）API和非管理员权限（non-adm
   }
 
 策略（Policies）
-===============
+=====================
 
 策略是定义了用户可以使用哪些API的权限信息. 一个策略包含了由申明（:ref:`statements <statements>`）组成的数组，每个申明又定义了访问API的权限信息.
 
 策略的清单（Policy Inventory）
------------------------------
+-------------------------------------
 
 .. list-table::
    :widths: 20 40 10 20 10
@@ -292,7 +292,7 @@ API被分为了管理员权限（admin-only）API和非管理员权限（non-adm
 .. _statements:
 
 申明（Statements）
------------------
+-----------------------
 
 申明是一个JSON文本, 其中包含了用于匹配API标识（API identities）的字符串以及对应的权限信息: *Allow* or *Deny*. 例如:
 
@@ -322,7 +322,7 @@ API被分为了管理员权限（admin-only）API和非管理员权限（non-adm
 在:ref:`API identities <API identities>`中可以找到API标识的列表.
 
 申明的清单（Statement Inventory）
-++++++++++++++++++++++++++++++++
+++++++++++++++++++++++++++++++++++++++++
 
 .. list-table::
    :widths: 20 40 10 20 10
@@ -352,14 +352,14 @@ API被分为了管理员权限（admin-only）API和非管理员权限（non-adm
 
 
 配额（Quota）
-============
+==================
 
 管理员账户可以使用配额来限制非管理员账户可以创建多少资源. ZStack会在创建非管理员账户时自动给它设定默认的配额, 管理员可以使用API :ref:`UpdateQuota <update quota>`来改变这个默认值. 可以在:ref:`default quotas <default quotas>`中找到默认配额的信息.
 
 
------------------------------
+-------------------------------------
 权限控制（Permission Control）
------------------------------
+-------------------------------------
 
 身份认证系统最让人激动的功能是可以控制API的访问权限, 可以控制什么人可以访问什么. 当用户登录进入ZStack时, 根据他们登录方式的不同, 会获得不同的API访问权限.
 
@@ -370,7 +370,7 @@ API被分为了管理员权限（admin-only）API和非管理员权限（non-adm
 **用户（User）**: 以账户所属的用户登陆后, 只能执行挂载到该用户上或通过组作用到该用户上的策略赋予的权限的API.
 
 使用用户和组（Using users and groups）
-=====================================
+==============================================
 
 在ZStack中最好的控制访问权限的方法是是允许登录为用户. 假设你是一个团队的经理，并且你需要从你公司的IT部门申请一些由ZStack管理的虚拟机. 首先你需要让ZStack管理员为你创建非管理员账户;
 有了这个账户后, 你可以创建一些用户和组并挂载合适的策略; 这时你可以将这些用户提供给你的团队成员，他们可以使用这些用户依照你创建的权限策略操作ZStack中的资源.
@@ -453,7 +453,7 @@ API被分为了管理员权限（admin-only）API和非管理员权限（non-adm
 到这里，你的组织结构就创建完成了, 你的组员可以使用他们的用户名口令登录.
 
 权限判断（Permission Evaluation）
-================================
+========================================
 
 一个策略中包含了由申明组成的列表，而每个申明又定义了对于API的访问权限（允许或拒绝）; 用户可以挂载多个策略, 可以挂载到用户上或者他们所在的组上. 
 当用户访问API的时候, 总会优先从用户上挂载的策略开始做判断，之后是他们所属的组上挂载的策略，直到权限被确定(允许或者拒绝). 默认会拒绝没有匹配任何策略的API访问.
@@ -463,20 +463,20 @@ API被分为了管理员权限（admin-only）API和非管理员权限（non-adm
 
 
 默认只读权限策略（Default Read Policy）
-======================================
+==================================================
 
 当用户被创建时, 一个默认的只读权限策略 **(action: .*:read, effect: Allow)** 会被挂载到新用户上, 因此用户可以查询资源(例如虚拟机, L3网络).
 
---------------------------
+-----------------------------------
 管理员账户（Admin Account）
---------------------------
+-----------------------------------
 
 在安装好ZStack之后, 默认会创建一个管理员账户(账户名: admin, 口令: password). 系统管理员可以使用这个账户来创建管理员用户, 这些用户拥有和管理员一样的不受限的访问权限, 这样可以允许不同的管理员用他们自己的账号口令登录.
 管理员账户的口令可是使用API*UpdateAccount*来更改.
 
----------------------------
+-----------------------------------
 共享资源（Shared Resources）
----------------------------
+-----------------------------------
 
 一个账户可以共享资源给其他账户. 这对于公有云特别有用, 例如管理员账户可以预定义一些模板 (例如镜像, 计算规格, 云盘规格, l3网络), 这样非管理员账户(通常是客户注册的) 可以使用这些模板来创建虚拟机. 请参见API :ref:`ShareResource <share resources>`.
 
@@ -487,21 +487,21 @@ API被分为了管理员权限（admin-only）API和非管理员权限（non-adm
           也就是说, 其他账户可以查询共享资源并使用他们 (例如使用镜像创建虚拟机)但不能在在这些共享资源上执行操作, 例如, 其他账户不能删除一个共享的镜像.
 
 
------------------
+-----------------------
 操作（Operations）
------------------
+-----------------------
 
 .. _create account:
 
 创建账户（Create Account）
-=========================
+================================
 
 管理员账户登陆后可以使用CreateAccount创建非管理员账户. 例如::
 
     CreateAccount name=frank password=123456
 
 参数（Parameters）
------------------
+----------------------
 
 .. list-table::
    :widths: 20 40 10 20 10
@@ -541,14 +541,14 @@ API被分为了管理员权限（admin-only）API和非管理员权限（non-adm
 .. _reset account password:
 
 创建用户（Create Users）
-=======================
+===============================
 
 一个账户可以使用CreateUser来创建一个用户. 例如::
 
     >>>CreateUser name=david password=123456
 
 参数（Parameters）
------------------
+----------------------
 
 .. list-table::
    :widths: 20 40 10 20 10
@@ -588,14 +588,14 @@ API被分为了管理员权限（admin-only）API和非管理员权限（non-adm
 .. _create group:
 
 创建组（Create Groups）
-======================
+=============================
 
 一个账户可以使用CreateUserGroup来创建一个组. 例如::
 
     >>>CreateUserGroup name=group
 
 参数（Parameters）
------------------
+----------------------
 
 .. list-table::
    :widths: 20 40 10 20 10
@@ -630,14 +630,14 @@ API被分为了管理员权限（admin-only）API和非管理员权限（non-adm
 .. _create policy:
 
 创建策略（Create Polices）
-=========================
+=================================
 
 一个账户可以使用CreatePolicy来创建一个策略. 例如::
 
     >>>CreatePolicy name=all statements='[{"actions":[".*"], "effect":"Allow"}]'
 
 参数（Parameters）
------------------
+----------------------
 
 .. list-table::
    :widths: 20 40 10 20 10
@@ -670,14 +670,14 @@ API被分为了管理员权限（admin-only）API和非管理员权限（non-adm
      - 0.8
 
 添加用户到组中（Add Users into Groups）
-======================================
+=================================================
 
 一个账户可以使用AddUserToGroup来添加一个用户到组中. 例如::
 
     >>>AddUserToGroup userUuid=d7646ae8af2140c0a3ccef2ad8da816d groupUuid=92c523a43651442489f8d2d598c7c3da
 
 参数（Parameters）
------------------
+----------------------
 
 .. list-table::
    :widths: 20 40 10 20 10
@@ -700,14 +700,14 @@ API被分为了管理员权限（admin-only）API和非管理员权限（non-adm
      - 0.8
 
 挂载策略到组上（Attach Polices to Groups）
-=========================================
+====================================================
 
 一个账户可以使用AttachPolicyToUserGroup来挂载一个策略到组上. 例如::
 
     >>>AttachPolicyToUserGroup groupUuid=92c523a43651442489f8d2d598c7c3da policyUuid=afb3bfbb911a42e0a662286728e49891
 
 参数（Parameters）
------------------
+----------------------
 
 .. list-table::
    :widths: 20 40 10 20 10
@@ -730,14 +730,14 @@ API被分为了管理员权限（admin-only）API和非管理员权限（non-adm
      - 0.8
 
 挂载策略到用户上（Attach Polices to Users）
-==========================================
+======================================================
 
 账户可以使用AttachPolicyToUser来挂载一个策略到用户上. 例如::
 
     >>>AttachPolicyToUser userUuid=d55c5fba4d1b4533961db9952dc15b00 policyUuid=36c27e8ff05c4780bf6d2fa65700f22e
 
 参数（Parameters）
------------------
+----------------------
 
 .. list-table::
    :widths: 20 40 10 20 10
@@ -760,14 +760,14 @@ API被分为了管理员权限（admin-only）API和非管理员权限（non-adm
      - 0.8
 
 从组卸载策略（Detach Polices from Groups）
-=========================================
+===================================================
 
 一个账户可以使用DetachPolicyFromUserGroup来从组卸载一个策略. 例如::
 
     >>>DetachPolicyFromUserGroup groupUuid=f1a092c6914840c9895c564abbc55375 policyUuid=afb3bfbb911a42e0a662286728e49891
 
 参数（Parameters）
------------------
+----------------------
 
 .. list-table::
    :widths: 20 40 10 20 10
@@ -790,14 +790,14 @@ API被分为了管理员权限（admin-only）API和非管理员权限（non-adm
      - 0.8
 
 从用户卸载策略（Detach Polices from Users）
-==========================================
+=====================================================
 
 一个账户可以使用DetachPolicyFromUser来从用户卸载一个策略. 例如::
 
     >>>DetachPolicyFromUser policyUuid=36c27e8ff05c4780bf6d2fa65700f22e userUuid=d7646ae8af2140c0a3ccef2ad8da816d
 
 参数（Parameters）
------------------
+----------------------
 
 .. list-table::
    :widths: 20 40 10 20 10
@@ -820,14 +820,14 @@ API被分为了管理员权限（admin-only）API和非管理员权限（non-adm
      - 0.8
 
 重置账户口令（Reset Account Password）
-=====================================
+===============================================
 
 一个账户可以使用UpdateAccount来重置它的口令. 例如::
 
     >>>UpdateAccount password=password
 
 参数（Parameters）
------------------
+----------------------
 
 .. list-table::
    :widths: 20 40 10 20 10
@@ -850,14 +850,14 @@ API被分为了管理员权限（admin-only）API和非管理员权限（non-adm
      - 0.8
 
 重置用户口令（Reset User Password）
-==================================
+============================================
 
 一个账户或一个用户可以使用UpdateUser来重置用户的口令. 例如::
 
     >>>UpdateUser password=password
 
 参数（Parameters）
------------------
+----------------------
 
 .. list-table::
    :widths: 20 40 10 20 10
@@ -880,14 +880,14 @@ API被分为了管理员权限（admin-only）API和非管理员权限（non-adm
      - 0.8
 
 删除组（Delete Groups）
-======================
+=============================
 
 一个账户可以使用DeleteUserGroup来删除一个组. 例如::
 
     >>>DeleteUserGroup uuid=bb0e50fe0cfa4ec1af1835f9c210ae8e
 
 参数（Parameters）
------------------
+----------------------
 
 .. list-table::
    :widths: 20 40 10 20 10
@@ -911,14 +911,14 @@ API被分为了管理员权限（admin-only）API和非管理员权限（non-adm
      - 0.8
 
 删除用户（Delete Users）
-=======================
+===============================
 
 一个账户可以使用DeleteUser来删除一个用户. 例如::
 
     >>>DeleteUser uuid=fa4ec1af1835f9c210ae8e
 
 参数（Parameters）
------------------
+----------------------
 
 .. list-table::
    :widths: 20 40 10 20 10
@@ -942,14 +942,14 @@ API被分为了管理员权限（admin-only）API和非管理员权限（non-adm
      - 0.8
 
 删除策略（Delete Policies）
-==========================
+==================================
 
 一个账户可以使用DeletePolicy来删除一个策略. 例如::
 
     >>>DeletePolicy uuid=bb0e50fe0cfa4ec1af1835f9c210ae8e
 
 参数（Parameters）
------------------
+----------------------
 
 .. list-table::
    :widths: 20 40 10 20 10
@@ -973,14 +973,14 @@ API被分为了管理员权限（admin-only）API和非管理员权限（non-adm
      - 0.8
 
 删除账户（Delete Accounts）
-==========================
+==================================
 
 管理员账户可以使用DeleteAccount来删除一个非管理员账户. 例如::
 
     >>>DeleteAccount uuid=bb0e50fe0cfa4ec1af1835f9c210ae8e
 
 参数（Parameters）
------------------
+----------------------
 
 .. list-table::
    :widths: 20 40 10 20 10
@@ -1008,14 +1008,14 @@ API被分为了管理员权限（admin-only）API和非管理员权限（non-adm
 .. _update quota:
 
 更新账户配额（Update Account Quota）
-===================================
+=============================================
 
 管理员账户可以使用UpdateQuota来更新一个账户的配额. 例如::
 
     >>>UpdateQuota identityUuid=bb0e50fe0cfa4ec1af1835f9c210ae8e name=vm.num value=100
 
 参数（Parameters）
------------------
+----------------------
 
 .. list-table::
    :widths: 20 40 10 20 10
@@ -1049,14 +1049,14 @@ API被分为了管理员权限（admin-only）API和非管理员权限（non-adm
 .. _share resources:
 
 共享资源（Share Resources）
-==========================
+==================================
 
 一个账户可以使用ShareResource来将资源共享其他账户. 例如::
 
     ShareResource accountUuids=bb0e50fe0cfa4ec1af1835f9c210ae8e,bb0e50fe0cfa4ec1af1835f9c210ae8e resourceUuids=b0662d80cc4945f8abaf6d1096da9eb5,d55c5fba4d1b4533961db9952dc15b00
 
 参数（Parameters）
------------------
+----------------------
 
 .. list-table::
    :widths: 20 40 10 20 10
@@ -1087,7 +1087,7 @@ API被分为了管理员权限（admin-only）API和非管理员权限（non-adm
 .. _revoke sharing:
 
 召回共享资源（Revoke Shared Resources）
-======================================
+================================================
 
 一个账户可以使用RevokeResourceSharing来从账户召回共享的资源. 例如::
 
@@ -1102,7 +1102,7 @@ API被分为了管理员权限（admin-only）API和非管理员权限（non-adm
     RevokeResourceSharing resourceUuids=b0662d80cc4945f8abaf6d1096da9eb5 toPublic=true
 
 参数（Parameters）
------------------
+----------------------
 
 .. list-table::
    :widths: 20 40 10 20 10
@@ -1138,7 +1138,7 @@ API被分为了管理员权限（admin-only）API和非管理员权限（non-adm
      - 0.6
 
 查询账户（Query Accounts）
-=========================
+=================================
 
 一个账户可以使用QueryAccount来查询它自己的账户, 而管理员账户则可以查询所有账户. 例如::
 
@@ -1149,12 +1149,12 @@ API被分为了管理员权限（admin-only）API和非管理员权限（non-adm
     >>>QueryAccount group.name=group1
 
 原生域查询（Primitive Fields of Query）
-++++++++++++++++++++++++++++++++++++++
+++++++++++++++++++++++++++++++++++++++++++++++
 
 请参见 :ref:`account inventory <account inventory>`
 
 嵌套和扩展域查询（Nested And Expanded Fields of Query）
-++++++++++++++++++++++++++++++++++++++++++++++++++++++
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 .. list-table::
    :widths: 20 30 40 10
@@ -1182,7 +1182,7 @@ API被分为了管理员权限（admin-only）API和非管理员权限（non-adm
      - 0.6
 
 查询用户（Query Users）
-======================
+==============================
 
 一个账户可以使用QueryUser来查询用户. 例如::
 
@@ -1193,12 +1193,12 @@ API被分为了管理员权限（admin-only）API和非管理员权限（non-adm
     >>>QueryUser name=frank policy.name=allow
 
 原生域查询（Primitive Fields of Query）
-++++++++++++++++++++++++++++++++++++++
+++++++++++++++++++++++++++++++++++++++++++++++
 
 请参见 :ref:`user inventory <user inventory>`
 
 嵌套和扩展域查询（Nested And Expanded Fields of Query）
-++++++++++++++++++++++++++++++++++++++++++++++++++++++
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 .. list-table::
    :widths: 20 30 40 10
@@ -1222,7 +1222,7 @@ API被分为了管理员权限（admin-only）API和非管理员权限（non-adm
      - 0.6
 
 查询策略（Query Policy）
-=======================
+===============================
 
 一个账户可以使用QueryPolicy来查询策略. 例如::
 
@@ -1233,12 +1233,12 @@ API被分为了管理员权限（admin-only）API和非管理员权限（non-adm
     >>>QueryPolicy user.name=frank
 
 原生域查询（Primitive Fields of Query）
-++++++++++++++++++++++++++++++++++++++
+++++++++++++++++++++++++++++++++++++++++++++++
 
 请参见 :ref:`policy inventory <policy inventory>`
 
 嵌套和原生域查询（Nested And Expanded Fields of Query）
-++++++++++++++++++++++++++++++++++++++++++++++++++++++
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 .. list-table::
    :widths: 20 30 40 10
@@ -1262,7 +1262,7 @@ API被分为了管理员权限（admin-only）API和非管理员权限（non-adm
      - 0.6
 
 查询组（Query Groups）
-=====================
+============================
 
 一个账户可以使用QueryUserGroup来查询组. 例如::
 
@@ -1273,12 +1273,12 @@ API被分为了管理员权限（admin-only）API和非管理员权限（non-adm
     >>>QueryUserGroup user.name=frank
 
 原生域查询（Primitive Fields of Query）
-++++++++++++++++++++++++++++++++++++++
+++++++++++++++++++++++++++++++++++++++++++++++
 
 请参见 :ref:`group inventory <group inventory>`
 
 嵌套和扩展域查询（Nested And Expanded Fields of Query）
-++++++++++++++++++++++++++++++++++++++++++++++++++++++
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 .. list-table::
    :widths: 20 30 40 10
@@ -1301,14 +1301,14 @@ API被分为了管理员权限（admin-only）API和非管理员权限（non-adm
      - 该组上挂载的策略
      - 0.6
 
---------------------
+----------------------------
 参考信息（Reference）
---------------------
+----------------------------
 
 .. _admin-only APIs:
 
 管理员权限API（Admin-only APIs）
-===============================
+=======================================
 
 ::
 
@@ -1395,7 +1395,7 @@ API被分为了管理员权限（admin-only）API和非管理员权限（non-adm
 .. _non-admin APIs:
 
 非管理员权限API（Non-admin APIs）
-================================
+==========================================
 
 ::
 
@@ -1542,7 +1542,7 @@ API被分为了管理员权限（admin-only）API和非管理员权限（non-adm
 .. _api identities:
 
 API标识（API Identities）
-========================
+==============================
 
 ::
 
@@ -1802,7 +1802,7 @@ API标识（API Identities）
 .. _default quotas:
 
 默认配额（Default Quotas）
-=========================
+=================================
 
 .. list-table::
    :widths: 20 40 20 20

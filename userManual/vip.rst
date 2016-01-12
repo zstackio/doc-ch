@@ -1,15 +1,15 @@
 .. _vip:
 
-==================
+======================================
 虚拟IP地址（Virtual IP Address）
-==================
+======================================
 
 .. contents:: `目录`
    :depth: 6
 
---------
+--------------------
 概览（Overview）
---------
+--------------------
 
 当桥接（bridging）两个网络的通信时, 许多网络服务（network services）都需要虚拟IP地址（virtual Ip addresses, VIP）, 例如端口转发（Port Forwarding）, EIP, VPN, 负载均衡（Load Balancing）; 
 流入的数据包（incoming packets）被发送到VIP，并被路由到（routed）私有网络IP（private network IPs）.
@@ -23,12 +23,12 @@
 
 .. _vip inventory:
 
----------
+----------------------
 清单（Inventory）
----------
+----------------------
 
 属性（Properties）
-==========
+======================
 
 .. list-table::
    :widths: 20 40 10 20 10
@@ -133,19 +133,19 @@
     }
 
 
-----------
+-----------------------
 操作（Operations）
-----------
+-----------------------
 
 创建VIP（Create VIP）
-==========
+=========================
 
 用户可以使用CreateVip来创建VIP. 例如::
 
     CreateVip name=vip1 l3NetworkUuid=95dede673ddf41119cbd04bcb5d73660
 
 参数（Parameters）
-++++++++++
+++++++++++++++++++++++
 
 .. list-table::
    :widths: 20 40 10 20 10
@@ -195,7 +195,7 @@ RequiredIp
 用户可以通过指定'requiredIp'来分配特定, 只要这个IP地址在目录L3网络中仍然可用.
 
 删除VIP（Delete VIP）
-==========
+==========================
 
 用户可以使用DeleteVip来删除VIP. 例如::
 
@@ -205,7 +205,7 @@ RequiredIp
 .. 警告:: 如果有网络服务绑定了该VIP, 例如, 一个EIP; 网络服务实体（network service entity, 一个EIP或一个端口转发规则）同样也会被自动删除.
 
 查询VIP（Query VIP）
-=========
+=========================
 
 用户可以使用QueryVip来查询VIP. 例如::
 
@@ -217,12 +217,12 @@ RequiredIp
 
 
 原生域（Primitive Fields）
-++++++++++++++++
++++++++++++++++++++++++++++++++
 
 请参见 :ref:`VIP inventory <vip inventory>`
 
 嵌套和扩展域（Nested And Expanded Fields）
-++++++++++++++++++++++++++
++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 .. list-table::
    :widths: 20 30 40 10
@@ -241,9 +241,9 @@ RequiredIp
      - VIP所绑定的端口转发规则
      - 0.6
 
-----
+-----------------
 标签（Tags）
-----
+-----------------
 
 用户可以使用resourceType=VipVO来在VIP上创建一个用户标签. 例如::
 

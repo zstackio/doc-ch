@@ -1,15 +1,15 @@
 .. _backup storage:
 
-==============
+================================
 备份存储（Backup Storage）
-==============
+================================
 
 .. contents:: `目录`
    :depth: 6
 
---------
+--------------------
 概览（Overview）
---------
+--------------------
 
 备份存储是保存用于创建云盘的:ref:`images <image>`的存储系统. 备份存储可以是基于存储的文件系统（filesystem based storage，例如NFS），也是可以基于对象的存储（object store based storage，例如OpenStack SWIFT）, 只要该存储系统为网络可共享的存储（network
 shared storage）. 除了可以为创建云盘提供模板以外, 备份存储也允许用户备份云盘或云盘快照（volume snapshots）.
@@ -30,12 +30,12 @@ shared storage）. 除了可以为创建云盘提供模板以外, 备份存储�
 
 .. _backup storage inventory:
 
----------
+----------------------
 清单（Inventory）
----------
+----------------------
 
 属性（Properties）
-==========
+======================
 
 .. list-table::
    :widths: 20 40 10 20 10
@@ -141,14 +141,14 @@ shared storage）. 除了可以为创建云盘提供模板以外, 备份存储�
 .. _sftp backup storage url:
 
 SFTP备份存储URL（SFTP Backup Storage URL）
------------------------
+------------------------------------------------
 
 对于SFTP备份存储而言, URL是一个目录在文件系统中的绝对路径. 例如, /storage/sftp.
 
 .. _backup storage capacity:
 
 容量（Capacity）
-++++++++
++++++++++++++++++++++
 
 为了方便选择合适的备份存储存放镜像, ZStack会监控备份存储的容量.
 备份存储的容量根据下面公式来计算::
@@ -159,7 +159,7 @@ SFTP备份存储URL（SFTP Backup Storage URL）
 .. _backup storage state:
 
 可用状态（State）
-+++++
+++++++++++++++++++++++++
 
 备份存储有两种可用状态:
 
@@ -175,7 +175,7 @@ SFTP备份存储URL（SFTP Backup Storage URL）
 .. _backup storage status:
 
 连接状态（Status）
-++++++
++++++++++++++++++++++++++
 
 主存储的连接状态反应了管理节点和备份存储之间的命令通道的状态.
 
@@ -203,9 +203,9 @@ SFTP备份存储URL（SFTP Backup Storage URL）
 
 .. _sftp backup storage:
 
--------------------
+------------------------------------------
 SFTP备份存储（SFTP Backup Storage）
--------------------
+------------------------------------------
 
 SFTP备份存储是使用本地文件系统（native filesystem）存储镜像，并使用OpenSSH服务器/客户端传输镜像的Linux服务器.
 ZStack使用一个python代理(SftpBackupStorageAgent)来管理Linux服务器; 镜像是通过使用`SCP <http://en.wikipedia.org/wiki/Secure_copy>`_从服务器上传/下载. 
@@ -248,24 +248,24 @@ ZStack使用一个python代理(SftpBackupStorageAgent)来管理Linux服务器; �
             "createDate": "Jun 1, 2015 3:42:26 PM"
         }
 
-----------
+-----------------------
 操作（Operations）
-----------
+-----------------------
 
 添加备份存储（Add Backup Storage）
-==================
+==========================================
 
 不同的备份存储类型使用不同的添加命令.
 
 添加SFTP备份存储（Add SFTP Backup Storage）
-+++++++++++++++++++++++
++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 管理员可以使用AddSftpBackupStorage来添加一个新的备份存储. 例如::
 
     AddSftpBackupStorage name=sftp1 url=/storage/sftp1 hostname=192.168.0.220 username=root password=password
 
 参数（Parameters）
-----------
+----------------------
 
 .. list-table::
    :widths: 20 40 10 20 10
@@ -313,7 +313,7 @@ ZStack使用一个python代理(SftpBackupStorageAgent)来管理Linux服务器; �
      - 0.6
 
 删除备份存储（Delete Backup Storage）
-=====================
+==============================================
 
 管理员可以使用DeleteBackupStorage来删除备份存储. 例如::
 
@@ -324,7 +324,7 @@ ZStack使用一个python代理(SftpBackupStorageAgent)来管理Linux服务器; �
              没有办法恢复一个已经删除了的备份存储.
 
 参数（Parameters）
-++++++++++
+++++++++++++++++++++++
 
 .. list-table::
    :widths: 20 40 10 20 10
@@ -349,14 +349,14 @@ ZStack使用一个python代理(SftpBackupStorageAgent)来管理Linux服务器; �
 
 
 改变可用状态（Change State）
-============
+=====================================
 
 管理员可以使用ChangeBackupStorageState来改变备份存储的可用状态. 例如::
 
     ChangeBackupStorageState uuid=33a35f75885f45ab96ea2626ce9c05a6 stateEvent=enable
 
 参数（Parameters）
-++++++++++
+++++++++++++++++++++++
 
 .. list-table::
    :widths: 20 40 10 20 10
@@ -385,14 +385,14 @@ ZStack使用一个python代理(SftpBackupStorageAgent)来管理Linux服务器; �
 .. _attach backup storage to zone:
 
 挂载区域（Attach Zone）
-===========
+==============================
 
 管理员可以使用AttachBackupStorageToZone将备份存储挂载到区域上. 例如::
 
     AttachBackupStorageToZone backupStorageUuid=d086c30f33914c98a6078269bab7bc8f zoneUuid=d086c30f33914c98a6078269bab7bc8f
 
 参数（Parameters）
-++++++++++
+++++++++++++++++++++++
 
 .. list-table::
    :widths: 20 40 10 20 10
@@ -417,14 +417,14 @@ ZStack使用一个python代理(SftpBackupStorageAgent)来管理Linux服务器; �
 .. _detach backup storage from zone:
 
 卸载区域（Detach Zone）
-===========
+==============================
 
 管理员可以使用DetachBackupStorageFromZone从一个区域卸载备份存储. 例如::
 
     DetachBackupStorageFromZone backupStorageUuid=d086c30f33914c98a6078269bab7bc8f zoneUuid=d086c30f33914c98a6078269bab7bc8f
 
 参数（Parameters）
-++++++++++
+++++++++++++++++++++++
 
 .. list-table::
    :widths: 20 40 10 20 10
@@ -447,7 +447,7 @@ ZStack使用一个python代理(SftpBackupStorageAgent)来管理Linux服务器; �
      - 0.6
 
 查询备份存储（Query Backup Storage）
-====================
+=============================================
 
 管理员可以使用QueryBackupStorage来查询备份存储. 例如::
 
@@ -459,7 +459,7 @@ ZStack使用一个python代理(SftpBackupStorageAgent)来管理Linux服务器; �
 
 
 原生域查询（Primitive Fields of Query）
-+++++++++++++++++++++++++
+++++++++++++++++++++++++++++++++++++++++++++++
 
 请参见 :ref:`backup storage inventory <backup storage inventory>`
 
@@ -467,7 +467,7 @@ ZStack使用一个python代理(SftpBackupStorageAgent)来管理Linux服务器; �
 .. _backup storage nested fields:
 
 嵌套和扩展域查询（Nested And Expanded Fields of Query）
-+++++++++++++++++++++++++++++++++++
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 .. list-table::
    :widths: 20 30 40 10
@@ -491,25 +491,25 @@ ZStack使用一个python代理(SftpBackupStorageAgent)来管理Linux服务器; �
      - 0.6
 
 查询SFTP备份存储（Query SFTP Backup Storage）
-=========================
+======================================================
 
 管理员可以使用QuerySftpBackupStorage来查询SFTP备份存储::
 
     QuerySftpBackupStorage name=sftp
 
 原生域查询（Primitive Fields of Query）
-+++++++++++++++++++++++++
+++++++++++++++++++++++++++++++++++++++++++++++
 
 请参见 :ref:`SFTP backup storage inventory <sftp backup storage>`
 
 嵌套和扩展域查询（Nested and Expanded Fields of Query）
-+++++++++++++++++++++++++++++++++++
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 请参见 :ref:`backup storage nested and expanded fields <backup storage nested fields>`
 
----------------------
+----------------------------------------
 全局配置（Global Configurations）
----------------------
+----------------------------------------
 
 .. _ping.interval:
 
@@ -551,9 +551,9 @@ ping.parallelismDegree
 
 管理节点可以同时ping的最大并行数量.
 
-----
+-----------------
 标签（Tags）
-----
+-----------------
 
 管理员可以使用resourceType=BackupStorageVO在备份存储上创建用户标签. 例如::
 
