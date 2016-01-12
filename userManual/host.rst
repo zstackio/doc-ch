@@ -250,7 +250,7 @@ ZStack管理节点会周期性的向主机发送ping命令（ping commands）以
 添加KVM主机（Add KVM Host）
 ++++++++++++
 
-管理员可是使用AddKVMHost来添加一个KVM主机. 例如::
+管理员可以使用AddKVMHost来添加一个KVM主机. 例如::
 
     AddKVMHost clusterUuid=8524072a4274403892bcc5b1972c2576 managementIp=192.168.10.10 name=kvm1 username=root password=password
 
@@ -309,7 +309,7 @@ KVM证书（KVM Credentials）
 ---------------
 
 ZStack使用一个叫做kvmagent的Python代理(agent)来管理KVM主机. ZStack使用`Ansible <http://www.ansible.com/home>`_ 来配置目标Linux操作系统并部署kvmagents，以实现完全的自动化;
-为了在目标Linux操作系统上启动Ansible, ZStack需要KVM主机的SSH **root**用户名和密码来注入SSH公钥（public keys），目的是为了让Ansible可以不需要输入用户名密码就可以工作. **root**是必须得因为Ansible和kvmagent都需要对系统的完整控制权限.
+为了在目标Linux操作系统上启动Ansible, ZStack需要KVM主机的SSH **root**用户名和密码来注入SSH公钥（public keys），目的是为了让Ansible可以不需要输入用户名密码就可以工作. 需要**root**是因为Ansible和kvmagent都需要对系统有完整的控制权限.
 
 删除主机（Delete Host）
 ===========
