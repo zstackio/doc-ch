@@ -14,7 +14,7 @@
 ### 参数（Parameters）
 
 | 名字| 描述 | 可选的 | 可选的参数 | 起始支持版本 |
-| --- | 
+| --- | ---
 | name | 物理机 | | | 0.6 
 | resourceUuid | 资源的uuid |是 |
 | description | 
@@ -23,9 +23,12 @@
 | username |
 | password |
 
-|sdffdsa
-|--
-|fds
+| Tables        | Are           | Cool  |
+| ------------- |:-------------:| -----:|
+| col 3 is      | right-aligned | $1600 |
+| col 2 is      | centered      |   $12 |
+| zebra stripes | are neat      |    $1 |
+
 
 ### 备注
 * **KVM证书（KVM Credentials）**
