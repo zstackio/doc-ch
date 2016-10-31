@@ -13,15 +13,15 @@
 
 ### 参数（Parameters）
      
-| 名字 | 描述 | 可选的 | 可选的参数 | 起始支持版本 |
-| --- |:-------:| -----:|
-| name | 物理机 |  
-| resourceUuid | 资源的uuid |是 |
-| description | 
-| clusterUuid |
-| managementIp |
-| username |
-| password |
+| 名字 | 描述 | 可选的参数 | 起始支持版本 |
+| ---- | --- | --- | --- |
+| name | | | |
+| resourceUuid | 资源的uuid |是 | |
+| description | | | 0.6|
+| clusterUuid | | | |
+| managementIp | | | |
+| username | | | | 
+| password |||| 
 
 
 
@@ -33,3 +33,9 @@
 * **KVM证书（KVM Credentials）**
 ZStack使用一个叫做kvmagent的Python代理(agent)来管理KVM主机. ZStack使用`Ansible<http://www.ansible.com/home>`_来配置目标Linux操作系统并部署kvmagents，以实现完全的自动化; 
 * **备注2**
+
+
+
+| fasdfasdf | fdsafdas | fsdafds |
+| ----- |---
+| 第三方大师傅 | 发的是分散 | 
