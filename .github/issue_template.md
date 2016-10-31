@@ -1,5 +1,9 @@
+
+[TOC]
+
+# 添加主机（Add Host）
 ### 描述
-添加主机（Add Host）
+
 不同虚拟机管理程序添加主机的命令不同.
 
 ### API
@@ -9,7 +13,7 @@
 
 管理员可以使用AddKVMHost来添加一个KVM主机. 例如: 
 
-> AddKVMHost clusterUuid=8524072a4274403892bcc5b1972c2576 managementIp=192.168.10.10 name=kvm1 username=root password=passwo
+> AddKVMHost clusterUuid=8524072a4274403892bcc5b1972c2576 managementIp=192.168.10.10 name=kvm1 username=root password=passwod
 
 ### 参数（Parameters）
 |名称 | 描述 | 可选的 | 可选的参数值 | 起始版本
