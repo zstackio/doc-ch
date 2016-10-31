@@ -23,17 +23,11 @@
 | username |
 | password |
 
-| 名字        | 描述           | 可选的参数 | 起始支持版本 |
-| ------------- |:-------------:| -----:|
-| name     | right-aligned | $1600 |
-| col 2 is      | centered      |   $12 |
-| zebra stripes | are neat      |    $1 |
-| resourceUuid | 资源的uuid |是 |
-| description | 
-| clusterUuid |
-| managementIp |
-| username |
-| password |
+
+
+| asfdsf | fsdfasdf
+| ---
+| fassdf |f ds
 
 ### 备注
 * **KVM证书（KVM Credentials）**
