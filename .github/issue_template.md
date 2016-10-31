@@ -15,7 +15,7 @@
 
 ### 参数（Parameters）
 | 名称 | 描述 | 可选的 | 可选的参数值 | 起始版本
-| --- |--- |
+| --- | --- |
 | name | 物理机 | | | 0.6 |
 | resourceUuid | 资源的uuid |是 |
 | description | 
