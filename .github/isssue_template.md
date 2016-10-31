@@ -12,15 +12,23 @@
 > AddKVMHost clusterUuid=8524072a4274403892bcc5b1972c2576 managementIp=192.168.10.10 name=kvm1 username=root password=passwo
 
 ### 参数（Parameters）
-|名称 | 描述 | 可选的 | 可选的参数值 | 起始版本
-| --- |--- |
-| name | 物理机 | | | 0.6 |
+|名字|描述 |可选的| 可选的参数 |起始支持版本
+
+|---| 
+
+| name | 物理机 | | | 0.6 
+
 | resourceUuid | 资源的uuid |是 |
+
 | description | 
+
 | clusterUuid |
+
 | managementIp |
+
 | username |
-| password | 
+
+| password |
 
 ### 备注
 * **KVM证书（KVM Credentials）**
