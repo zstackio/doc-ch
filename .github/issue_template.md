@@ -9,7 +9,7 @@
 
 管理员可以使用AddKVMHost来添加一个KVM主机. 例如: 
 
-> AddKVMHost clusterUuid=8524072a4274403892bcc5b1972c2576 managementIp=192.168.10.10 name=kvm1 username=root password=passwo
+> AddKVMHost clusterUuid=8524072a4274403892bcc5b1972c2576 managementIp=192.168.10.10 name=kvm1 username=root password=password
 
 ### 参数（Parameters）
      
