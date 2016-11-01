@@ -23,9 +23,6 @@
 | username | | | | 
 | password |||| 
 
-
-
-
 ### 备注
 * **KVM证书（KVM Credentials）**
 ZStack使用一个叫做kvmagent的Python代理(agent)来管理KVM主机. ZStack使用`Ansible<http://www.ansible.com/home>`_来配置目标Linux操作系统并部署kvmagents，以实现完全的自动化; 
