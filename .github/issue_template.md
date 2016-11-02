@@ -9,7 +9,34 @@
 
 管理员可以使用AddKVMHost来添加一个KVM主机. 例如: 
 
-> AddKVMHost clusterUuid=8524072a4274403892bcc5b1972c2576 managementIp=192.168.10.10 name=kvm1 username=root password=password
+```
+AddKVMHost clusterUuid=f995b4e3593c45fabeabd92185d33f91 managementIp=172.20.12.111 name=Host1 username=root password=password
+```
+返回结果：
+```
+{
+    "inventory": {
+        "availableCpuCapacity": 40,
+        "availableMemoryCapacity": 8203108352,
+        "clusterUuid": "f995b4e3593c45fabeabd92185d33f91",
+        "createDate": "Nov 2, 2016 11:22:15 PM",
+        "hypervisorType": "KVM",
+        "lastOpDate": "Nov 2, 2016 11:22:29 PM",
+        "managementIp": "172.20.12.111",
+        "name": "Host1",
+        "sshPort": 22,
+        "state": "Enabled",
+        "status": "Connected",
+        "totalCpuCapacity": 40,
+        "totalMemoryCapacity": 8203108352,
+        "username": "root",
+        "uuid": "62eea75fc6204a439d3d1dd7b1946bc5",
+        "zoneUuid": "d75c4578be6145fbb1a1f5bfc4b43e95"
+    },
+    "success": true
+}
+```
+
 
 ### 参数（Parameters）
      
